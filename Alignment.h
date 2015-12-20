@@ -14,6 +14,36 @@ class Alignment: public Template {
 public:
 	Alignment();
 	virtual ~Alignment();
+
+	void fetchFullyExtended3DCoords();
+	void storeInCoordsFormat(std::string, int flag, int id);
+	void storeInPDBFormat(std::string, int flag, int id);
+	string shortName2LongName(char name);
+
+
+
+	int getFullyExtendedEnd();
+	void setFullyExtendedEnd(int fullyExtendedEnd);
+	std::string& getFullyExtendedHeadPart();
+	void setFullyExtendedHeadPart(std::string& fullyExtendedHeadPart);
+	Point*& getFullyExtendedHeadPart3DCoords();
+	void setFullyExtendedHeadPart3DCoords(
+			Point*& fullyExtendedHeadPart3DCoords);
+	int getFullyExtendedStart();
+	void setFullyExtendedStart(int fullyExtendedStart);
+	std::string& getFullyExtendedTailPart();
+	void setFullyExtendedTailPart(std::string& fullyExtendedTailPart);
+	Point*& getFullyExtendedTailPart3DCoords();
+	void setFullyExtendedTailPart3DCoords(
+			Point*& fullyExtendedTailPart3DCoords);
+	Point*& getLocalAlignment3DCoords();
+	void setLocalAlignment3DCoords(Point*& localAlignment3DCoords);
+	int getLocalAlignmentEnd();
+	void setLocalAlignmentEnd(int localAlignmentEnd);
+	std::string& getLocalAlignmentPart();
+	void setLocalAlignmentPart(std::string& localAlignmentPart);
+	int getLocalAlignmentStart();
+	void setLocalAlignmentStart(int localAlignmentStart);
 	int getQueryEnd();
 	void setQueryEnd(int queryEnd);
 	std::string& getQueryPart();
@@ -26,37 +56,6 @@ public:
 	void setSubjectPart(std::string& subjectPart);
 	int getSubjectStart();
 	void setSubjectStart(int subjectStart);
-	Point*& getFullyExtended3DCoords();
-	void setFullyExtended3DCoords(Point*& fullyExtended3DCoords);
-	int getFullyExtendedEnd();
-	void setFullyExtendedEnd(int fullyExtendedEnd);
-	std::string& getFullyExtendedPart();
-	void setFullyExtendedPart(std::string& fullyExtendedPart);
-	int getFullyExtendedStart();
-	void setFullyExtendedStart(int fullyExtendedStart);
-	Point*& getLocalAlignment3DCoords();
-	void setLocalAlignment3DCoords(Point*& localAlignment3DCoords);
-	int getLocalAlignmentEnd();
-	void setLocalAlignmentEnd(int localAlignmentEnd);
-	std::string& getLocalAlignmentPart();
-	void setLocalAlignmentPart(std::string& localAlignmentPart);
-	int getLocalAlignmentStart();
-	void setLocalAlignmentStart(int localAlignmentStart);
-	std::string& getFullyExtendedHeadPart();
-	void setFullyExtendedHeadPart(std::string& fullyExtendedHeadPart);
-	Point*& getFullyExtendedHeadPart3DCoords();
-	void setFullyExtendedHeadPart3DCoords(
-			Point*& fullyExtendedHeadPart3DCoords);
-	std::string& getFullyExtendedTailPart();
-	void setFullyExtendedTailPart(std::string& fullyExtendedTailPart);
-	Point*& getFullyExtendedTailPart3DCoords();
-	void setFullyExtendedTailPart3DCoords(
-			Point*& fullyExtendedTailPart3DCoords);
-
-	void fetchFullyExtended3DCoords();
-	void storeInCoordsFormat(std::string, int flag,int id);
-	void storeInPDBFormat(std::string, int flag,int id);
-	string shortName2LongName(char name);
 
 protected:
 	int queryStart;

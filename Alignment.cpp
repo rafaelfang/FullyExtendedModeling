@@ -15,134 +15,6 @@ Alignment::~Alignment() {
 	// TODO Auto-generated destructor stub
 }
 
-int Alignment::getQueryEnd() {
-	return queryEnd;
-}
-
-void Alignment::setQueryEnd(int queryEnd) {
-	this->queryEnd = queryEnd;
-}
-
-std::string& Alignment::getQueryPart() {
-	return queryPart;
-}
-
-void Alignment::setQueryPart(std::string& queryPart) {
-	this->queryPart = queryPart;
-}
-
-int Alignment::getQueryStart() {
-	return queryStart;
-}
-
-void Alignment::setQueryStart(int queryStart) {
-	this->queryStart = queryStart;
-}
-
-int Alignment::getSubjectEnd() {
-	return subjectEnd;
-}
-
-void Alignment::setSubjectEnd(int subjectEnd) {
-	this->subjectEnd = subjectEnd;
-}
-
-std::string& Alignment::getSubjectPart() {
-	return subjectPart;
-}
-
-void Alignment::setSubjectPart(std::string& subjectPart) {
-	this->subjectPart = subjectPart;
-}
-
-int Alignment::getSubjectStart() {
-	return subjectStart;
-}
-
-void Alignment::setSubjectStart(int subjectStart) {
-	this->subjectStart = subjectStart;
-}
-
-int Alignment::getFullyExtendedEnd() {
-	return fullyExtendedEnd;
-}
-
-void Alignment::setFullyExtendedEnd(int fullyExtendedEnd) {
-	this->fullyExtendedEnd = fullyExtendedEnd;
-}
-
-int Alignment::getFullyExtendedStart() {
-	return fullyExtendedStart;
-}
-
-void Alignment::setFullyExtendedStart(int fullyExtendedStart) {
-	this->fullyExtendedStart = fullyExtendedStart;
-}
-
-Point*& Alignment::getLocalAlignment3DCoords() {
-	return localAlignment3DCoords;
-}
-
-void Alignment::setLocalAlignment3DCoords(Point*& localAlignment3DCoords) {
-	this->localAlignment3DCoords = localAlignment3DCoords;
-}
-int Alignment::getLocalAlignmentEnd() {
-	return localAlignmentEnd;
-}
-
-void Alignment::setLocalAlignmentEnd(int localAlignmentEnd) {
-	this->localAlignmentEnd = localAlignmentEnd;
-}
-
-std::string& Alignment::getLocalAlignmentPart() {
-	return localAlignmentPart;
-}
-
-void Alignment::setLocalAlignmentPart(std::string& localAlignmentPart) {
-	this->localAlignmentPart = localAlignmentPart;
-}
-
-int Alignment::getLocalAlignmentStart() {
-	return localAlignmentStart;
-}
-
-void Alignment::setLocalAlignmentStart(int localAlignmentStart) {
-	this->localAlignmentStart = localAlignmentStart;
-}
-std::string& Alignment::getFullyExtendedHeadPart() {
-	return fullyExtendedHeadPart;
-}
-
-void Alignment::setFullyExtendedHeadPart(std::string& fullyExtendedHeadPart) {
-	this->fullyExtendedHeadPart = fullyExtendedHeadPart;
-}
-
-Point*& Alignment::getFullyExtendedHeadPart3DCoords() {
-	return fullyExtendedHeadPart3DCoords;
-}
-
-void Alignment::setFullyExtendedHeadPart3DCoords(
-		Point*& fullyExtendedHeadPart3DCoords) {
-	this->fullyExtendedHeadPart3DCoords = fullyExtendedHeadPart3DCoords;
-}
-
-std::string& Alignment::getFullyExtendedTailPart() {
-	return fullyExtendedTailPart;
-}
-
-void Alignment::setFullyExtendedTailPart(std::string& fullyExtendedTailPart) {
-	this->fullyExtendedTailPart = fullyExtendedTailPart;
-}
-
-Point*& Alignment::getFullyExtendedTailPart3DCoords() {
-	return fullyExtendedTailPart3DCoords;
-}
-
-void Alignment::setFullyExtendedTailPart3DCoords(
-		Point*& fullyExtendedTailPart3DCoords) {
-	this->fullyExtendedTailPart3DCoords = fullyExtendedTailPart3DCoords;
-}
-
 void Alignment::fetchFullyExtended3DCoords() {
 	Point subjectBigNumber(10000, 10000, 10000);
 	//get the 3d coordinates for subject
@@ -160,7 +32,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 
 	}
 	//debugging
-	/*
+/*
 	 std::cout << "subject3DCoords" << std::endl;
 	 for (int i = 0; i < subjectPart.size(); i++) {
 	 std::cout << subject3DCoords[i].getX() << ","
@@ -168,7 +40,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << std::endl;
 	 }
 	 std::cout << "subject3DCoords end" << std::endl;
-	 */
+*/
 	//debugging
 	//copying the coordinates from subject to query
 	Point* tempLocalAlignment3DCoords = (Point*) malloc(
@@ -184,7 +56,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 		}
 	}
 	//debugging
-	/*
+/*
 	 std::cout << "tempLocalAlignment3DCoords" << std::endl;
 	 for (int i = 0; i < queryPart.size(); i++) {
 	 std::cout << tempLocalAlignment3DCoords[i].getX() << ","
@@ -192,7 +64,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << tempLocalAlignment3DCoords[i].getZ() << std::endl;
 	 }
 	 std::cout << "tempLocalAlignment3DCoords end" << std::endl;
-	 */
+*/
 	//debugging
 	//local alignment 3D coordinates
 	localAlignment3DCoords = (Point*) malloc(
@@ -208,7 +80,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	}
 
 	//debugging
-	/*
+/*
 	 std::cout << "localAlignment3DCoords" << std::endl;
 	 for (int i = 0; i < queryPart.size() - queryGaps; i++) {
 	 if (i % 10 == 0) {
@@ -229,7 +101,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 std::cout << localAlignment3DCoords[i].getZ() << "\t";
 	 }
 	 std::cout << "localAlignment3DCoords end" << std::endl;
-	 */
+*/
 	//debugging
 	//local alignment start, part, end
 	localAlignmentStart = queryStart;
@@ -242,7 +114,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	//std::cout << "local alignment end: " << localAlignmentEnd << std::endl;
 	//std::cout << "local alignment part: " << localAlignmentPart << std::endl;
 	//debug
-	/*
+/*
 	 Point* result = localAlignment3DCoords;
 	 int localAlignment3DCoordsSize = localAlignmentEnd - localAlignmentStart
 	 + 1;
@@ -254,7 +126,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 std::cout << result[i].getX() << "\t";
 	 }
 	 std::cout << std::endl;
-	 */
+*/
 	//debug
 	//**********************************************************
 	//fully extended part
@@ -275,12 +147,12 @@ void Alignment::fetchFullyExtended3DCoords() {
 		fullyExtendedHeadPart3DCoords[i] =
 				templateCarbonAlphaCoords[subjectStart - 1
 						- numberOfHeadToBeExtended + i];
-		fullyExtendedHeadPart += targetSequence[subjectStart - 1
+		fullyExtendedHeadPart += targetSequence[localAlignmentStart - 1
 				- numberOfHeadToBeExtended + i];
 	}
 
 	//debug
-	/*
+/*
 	 std::cout << "fully extended head part:" << fullyExtendedHeadPart
 	 << std::endl;
 	 std::cout << "fullyExtendedHeadPart" << std::endl;
@@ -290,7 +162,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << fullyExtendedHeadPart3DCoords[i].getZ() << std::endl;
 	 }
 	 std::cout << "fullyExtendedHeadPart finish" << std::endl;
-	 */
+*/
 	//debug
 	int numberOfTailToBeExtended = 0;
 	if (localAlignmentEnd > targetLength) {
@@ -308,14 +180,15 @@ void Alignment::fetchFullyExtended3DCoords() {
 	fullyExtendedEnd = localAlignmentEnd + numberOfTailToBeExtended;
 	fullyExtendedTailPart3DCoords = (Point*) malloc(
 			sizeof(Point) * numberOfTailToBeExtended);
+
 	for (int i = 0; i < numberOfTailToBeExtended; i++) {
 		fullyExtendedTailPart3DCoords[i] = templateCarbonAlphaCoords[subjectEnd
 				+ i];
-		fullyExtendedTailPart += targetSequence[subjectEnd + i];
+		fullyExtendedTailPart += targetSequence[localAlignmentEnd + i];
 	}
 
 	//debug
-	/*
+/*
 	 std::cout << "fully extended tail part:" << fullyExtendedTailPart
 	 << std::endl;
 	 std::cout << "fullyExtendedTailPart" << std::endl;
@@ -327,7 +200,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 }
 	 std::cout << std::endl;
 	 std::cout << "fullyExtendedTailPart finish" << std::endl;
-	 */
+*/
 	//debug
 }
 
@@ -479,4 +352,134 @@ string Alignment::shortName2LongName(char name) {
 	} else if (name == 'Z') {
 		return "GLX";
 	}
+}
+
+int Alignment::getFullyExtendedEnd() {
+	return fullyExtendedEnd;
+}
+
+void Alignment::setFullyExtendedEnd(int fullyExtendedEnd) {
+	this->fullyExtendedEnd = fullyExtendedEnd;
+}
+
+std::string& Alignment::getFullyExtendedHeadPart() {
+	return fullyExtendedHeadPart;
+}
+
+void Alignment::setFullyExtendedHeadPart(std::string& fullyExtendedHeadPart) {
+	this->fullyExtendedHeadPart = fullyExtendedHeadPart;
+}
+
+Point*& Alignment::getFullyExtendedHeadPart3DCoords() {
+	return fullyExtendedHeadPart3DCoords;
+}
+
+void Alignment::setFullyExtendedHeadPart3DCoords(
+		Point*& fullyExtendedHeadPart3DCoords) {
+	this->fullyExtendedHeadPart3DCoords = fullyExtendedHeadPart3DCoords;
+}
+
+int Alignment::getFullyExtendedStart() {
+	return fullyExtendedStart;
+}
+
+void Alignment::setFullyExtendedStart(int fullyExtendedStart) {
+	this->fullyExtendedStart = fullyExtendedStart;
+}
+
+std::string& Alignment::getFullyExtendedTailPart() {
+	return fullyExtendedTailPart;
+}
+
+void Alignment::setFullyExtendedTailPart(std::string& fullyExtendedTailPart) {
+	this->fullyExtendedTailPart = fullyExtendedTailPart;
+}
+
+Point*& Alignment::getFullyExtendedTailPart3DCoords() {
+	return fullyExtendedTailPart3DCoords;
+}
+
+void Alignment::setFullyExtendedTailPart3DCoords(
+		Point*& fullyExtendedTailPart3DCoords) {
+	this->fullyExtendedTailPart3DCoords = fullyExtendedTailPart3DCoords;
+}
+
+Point*& Alignment::getLocalAlignment3DCoords() {
+	return localAlignment3DCoords;
+}
+
+void Alignment::setLocalAlignment3DCoords(Point*& localAlignment3DCoords) {
+	this->localAlignment3DCoords = localAlignment3DCoords;
+}
+
+int Alignment::getLocalAlignmentEnd() {
+	return localAlignmentEnd;
+}
+
+void Alignment::setLocalAlignmentEnd(int localAlignmentEnd) {
+	this->localAlignmentEnd = localAlignmentEnd;
+}
+
+std::string& Alignment::getLocalAlignmentPart() {
+	return localAlignmentPart;
+}
+
+void Alignment::setLocalAlignmentPart(std::string& localAlignmentPart) {
+	this->localAlignmentPart = localAlignmentPart;
+}
+
+int Alignment::getLocalAlignmentStart() {
+	return localAlignmentStart;
+}
+
+void Alignment::setLocalAlignmentStart(int localAlignmentStart) {
+	this->localAlignmentStart = localAlignmentStart;
+}
+
+int Alignment::getQueryEnd() {
+	return queryEnd;
+}
+
+void Alignment::setQueryEnd(int queryEnd) {
+	this->queryEnd = queryEnd;
+}
+
+std::string& Alignment::getQueryPart() {
+	return queryPart;
+}
+
+void Alignment::setQueryPart(std::string& queryPart) {
+	this->queryPart = queryPart;
+}
+
+int Alignment::getQueryStart() {
+	return queryStart;
+}
+
+void Alignment::setQueryStart(int queryStart) {
+	this->queryStart = queryStart;
+}
+
+int Alignment::getSubjectEnd() {
+	return subjectEnd;
+}
+
+void Alignment::setSubjectEnd(int subjectEnd) {
+	this->subjectEnd = subjectEnd;
+}
+
+std::string& Alignment::getSubjectPart() {
+	return subjectPart;
+}
+
+void Alignment::setSubjectPart(std::string& subjectPart) {
+	this->subjectPart = subjectPart;
+}
+
+int Alignment::getSubjectStart() {
+	return subjectStart;
+}
+
+void Alignment::setSubjectStart(int subjectStart) {
+	this->subjectStart = subjectStart;
 }
