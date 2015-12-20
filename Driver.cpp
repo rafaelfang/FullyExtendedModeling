@@ -10,7 +10,7 @@
 
 #include "Point.h"
 #include "Alignment.h"
-
+#include "BlastParser.h"
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
@@ -21,7 +21,12 @@ int main(int argc, char* argv[]) {
 	std::string experimentLocation(
 			"/home/cf797/test/FullyExtendedModeling/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
+	BlastParser blastParser(argv[2]);
+	blastParser.loadAlignmentsInfo(alignmentResultLocation,targetLocation,proteinDatabaseLocation);
+	blastParser.storeJsonRecords(experimentLocation);
+	blastParser.storeCoordsAndPDB(experimentLocation);
 
+/*
 	Alignment alignment;
 
 	//load target information
@@ -30,10 +35,10 @@ int main(int argc, char* argv[]) {
 	alignment.loadTargetInfo(targetLocation);
 
 	//load template information
-	std::string _templateName("3HN5_A");
+	std::string _templateName("4EIU_A");
 	alignment.setTemplateName(_templateName);
 	alignment.loadTemplateInfo(proteinDatabaseLocation);
-
+*/
 	//print out alignment basic information
 
 	//std::cout << "alignment basic information:" << std::endl;
@@ -41,9 +46,9 @@ int main(int argc, char* argv[]) {
 	//std::cout << "target length: "<<alignment.getTargetLength() << std::endl;
 	//std::cout << alignment.getTargetSequence() << std::endl;
 	//std::cout << alignment.getTemplateName() << std::endl;
-	// std::cout << alignment.getTemplateSequenceInfo() << std::endl;
+	//std::cout << alignment.getTemplateSequenceInfo() << std::endl;
 	//std::cout << "template length: "<<alignment.getTemplateSequenceLength() << std::endl;
-	/*
+/*
 	 Point* templateCarbonAlphaCoords = alignment.getTemplateCarbonAlphaCoords();
 	 for (int i = 0; i < alignment.getTemplateSequenceLength(); i++) {
 	 std::cout << templateCarbonAlphaCoords[i].getX() << ","
@@ -51,23 +56,23 @@ int main(int argc, char* argv[]) {
 	 << templateCarbonAlphaCoords[i].getZ() << std::endl;
 	 }
 	 std::cout << "alignment basic information end" << std::endl;
-	 */
-	alignment.setQueryStart(20);
-	std::string _queryPart(
-			"CSYDNFEEPKATLTGRAIYDGEAVGVRS-GSSEFALFQDGYALHGSIPVYVAQDGSYSVSLFNGDYKLV-RMGNAPWERPSNDTIYITVKGNTVQDIPVTPYFSVRNVSFARNGNKVTARFTINKVVADANLENVGIYLGTGILTDEKQKE----------AE-LALGNTVSLNQENTAEIEIPSGLLNESYLYARVGVKSDKSSEYCYSQSIKVA");
+*/
+/*
+	alignment.setQueryStart(21);
+	std::string _queryPart("SYDNFEEPKATLTGKAIY--DGEAVGVRSG--SSEFALFQDGYAL--KGSIPVYIAQDGSY-SVSLFNGDYKLVRMGNA-PWERPSND-------TIYITVRGNTVQDIPVTPYFFV-RNVSFAKNGNKITARFTINKVVANA-----------------NMENVGIYLGTGILTDEKQKEAELKLGNTVSLD-----QENTAEIEIPSGLVNESYLYARVGVKSD-------KSSEYCYSQSIKV");
 	alignment.setQueryPart(_queryPart);
-	alignment.setQueryEnd(222);
+	alignment.setQueryEnd(221);
 
 	alignment.setSubjectStart(1);
-	std::string _subjectPart(
-			"GMKDNYDAPESMLTGRVMYNGEALQLRGNEAVQLQLYQHGYAKHDPINVYVNQDGMYSANLFDGEYQMITKSGNGPWTSEGRDTINVTVAGNTVQDVEVTPYYLVRDAQMTLEGNKVNASFKVEKVA-GGGIDRVFFMLSTTQFVNDAEHNVDRYDETDNLDAYDETGKLYTFATRDYTDNSMFQTALKRGTLFGRICIWPKGSDQGIYSKVIRLK");
+	std::string _subjectPart("GIDNYEEPSETIWGEVVDEATGKRVLTDQGSEGIRVRLTELSWGDNVQHNPDFYCMMDGTFQNTKIFKGEYNVRIDGPFIPLVRENTDGTLLHDGSVNTEISGTTKVKFEVQPFLNVEFVGNPQVSNGVIKAQVRVTRGVSDEVFREKIQPMGNWKDEYLNVTDIQFFVSYSNTVGYRARDERWSSSINYEGKSFEGLLGKEVTIQSNGNVPSGRKVFVRAAARINYDTPVGSGTRRWNYSEPMEV");
 	alignment.setSubjectPart(_subjectPart);
-	alignment.setSubjectEnd(215);
+	alignment.setSubjectEnd(246);
 
 	alignment.fetchFullyExtended3DCoords();
-	std::string _methodUsed("hhsearch");
+	std::string _methodUsed("blast");
 	alignment.setMethodUsed(_methodUsed);
 	alignment.storeInCoordsFormat(experimentLocation,1,1);
 	alignment.storeInPDBFormat(experimentLocation,1,1);
+*/
 	return 0;
 }
