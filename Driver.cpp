@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	std::string targetLocation("/home/cf797/test/casp10Seq/");
 	std::string alignmentResultLocation(
 			"/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob/");
-	std::string experimentLocation("/home/cf797/test/FullyExtendedModeling/");
+	std::string experimentLocation("/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob_fullyExtended/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
 	if (strcmp(argv[1], "-blast") == 0) {
 		BlastParser blastParser(argv[2]);
