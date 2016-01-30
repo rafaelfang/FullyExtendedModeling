@@ -210,9 +210,15 @@ void HHSearchParser::storeJsonRecords(string resultPosition) {
 				<< hhsearchRecords[i].getTargetLength() << "\"," << endl;
 		myfile << "\t\"templateName\":\""
 				<< hhsearchRecords[i].getTemplateName() << "\"," << endl;
-		myfile << "\t\"templateSequenceInfo\":\""
-				<< hhsearchRecords[i].getTemplateSequenceInfo() << "\","
+		myfile << "\t\"templateReferenceSequenceInfo\":\""
+				<< hhsearchRecords[i].getTemplateReferenceSequenceInfo()
+				<< "\"," << endl;
+		myfile << "\t\"templateRealSequenceInfo\":\""
+				<< hhsearchRecords[i].getTemplateRealSequenceInfo() << "\","
 				<< endl;
+		myfile << "\t\"templateTrueSecondaryStructure\":\""
+				<< hhsearchRecords[i].getTemplateTrueSecondaryStructure()
+				<< "\"," << endl;
 		myfile << "\t\"templateSequenceLength\":\""
 				<< hhsearchRecords[i].getTemplateSequenceLength() << "\","
 				<< endl;
