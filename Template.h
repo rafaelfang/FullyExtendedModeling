@@ -20,15 +20,25 @@ public:
 	void setTemplateCarbonAlphaCoords(Point*& templateCarbonAlphaCoords);
 	std::string& getTemplateName();
 	void setTemplateName(std::string& templateName);
-	std::string& getTemplateSequenceInfo();
-	void setTemplateSequenceInfo(std::string& templateSequenceInfo);
+
 	int getTemplateSequenceLength();
 	void setTemplateSequenceLength(int templateSequenceLength);
 
 	int loadTemplateInfo(std::string templateLocation);
+	std::string& getTemplateReferenceSequenceInfo();
+	void setTemplateReferenceSequenceInfo(
+			std::string& templateReferenceSequenceInfo);
+	std::string& getTemplateRealSequenceInfo();
+	void setTemplateRealSequenceInfo(std::string& templateRealSequenceInfo);
+	std::string& getTemplateTrueSecondaryStructure();
+	void setTemplateTrueSecondaryStructure(
+			std::string& templateTrueSecondaryStructure);
+
 protected:
 	std::string templateName;
-	std::string templateSequenceInfo;
+	std::string templateReferenceSequenceInfo;
+	std::string templateRealSequenceInfo;
+	std::string templateTrueSecondaryStructure;
 	int templateSequenceLength;
 	std::string methodUsed;
 	Point* templateCarbonAlphaCoords;

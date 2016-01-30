@@ -7,8 +7,6 @@
 
 #include "Template.h"
 
-
-
 Template::Template() {
 	// TODO Auto-generated ructor stub
 
@@ -41,12 +39,13 @@ void Template::setTemplateName(std::string& templateName) {
 	this->templateName = templateName;
 }
 
-std::string& Template::getTemplateSequenceInfo() {
-	return templateSequenceInfo;
+std::string& Template::getTemplateReferenceSequenceInfo() {
+	return templateReferenceSequenceInfo;
 }
 
-void Template::setTemplateSequenceInfo(std::string& templateSequenceInfo) {
-	this->templateSequenceInfo = templateSequenceInfo;
+void Template::setTemplateReferenceSequenceInfo(
+		std::string& templateReferenceSequenceInfo) {
+	this->templateReferenceSequenceInfo = templateReferenceSequenceInfo;
 }
 
 int Template::getTemplateSequenceLength() {
@@ -83,14 +82,52 @@ int Template::loadTemplateInfo(std::string templateLocation) {
 				}
 				numberOfChars--;
 
-				std::string _realSequenceInfo(line);
-				_realSequenceInfo = _realSequenceInfo.erase(
-						_realSequenceInfo.find_last_not_of(" \n\r\t") + 1);
-				setTemplateSequenceInfo(_realSequenceInfo);
+				std::string _referenceSequenceInfo(line);
+				_referenceSequenceInfo = _referenceSequenceInfo.erase(
+						_referenceSequenceInfo.find_last_not_of(" \n\r\t") + 1);
+				setTemplateReferenceSequenceInfo(_referenceSequenceInfo);
 
 				//cout << templateSequenceInfo << endl;
 				setTemplateSequenceLength(numberOfChars);
 				//cout << templateSequenceLength << endl;
+			}
+
+			if ((strstr(line, ">Real Sequence Info:") != NULL)) {
+
+				fgets(line, lineLength, fptr);
+
+				int numberOfChars = 0;
+				while (line[numberOfChars] != '\0') {
+
+					numberOfChars++;
+				}
+				numberOfChars--;
+
+				std::string _referenceRealSequenceInfo(line);
+				_referenceRealSequenceInfo = _referenceRealSequenceInfo.erase(
+						_referenceRealSequenceInfo.find_last_not_of(" \n\r\t")
+								+ 1);
+				setTemplateRealSequenceInfo(_referenceRealSequenceInfo);
+
+			}
+
+			if ((strstr(line, ">True Secondary Structure:") != NULL)) {
+
+				fgets(line, lineLength, fptr);
+
+				int numberOfChars = 0;
+				while (line[numberOfChars] != '\0') {
+
+					numberOfChars++;
+				}
+				numberOfChars--;
+
+				std::string _referenceTrueSecondaryStructure(line);
+				_referenceTrueSecondaryStructure = _referenceTrueSecondaryStructure.erase(
+						_referenceTrueSecondaryStructure.find_last_not_of(" \n\r\t")
+								+ 1);
+				setTemplateTrueSecondaryStructure(_referenceTrueSecondaryStructure);
+
 			}
 			if ((strstr(line, ">Ca XYZ:") != NULL)) {
 
@@ -140,4 +177,22 @@ int Template::loadTemplateInfo(std::string templateLocation) {
 		}
 	}
 	return 0;
+}
+
+std::string& Template::getTemplateRealSequenceInfo() {
+	return templateRealSequenceInfo;
+}
+
+void Template::setTemplateRealSequenceInfo(
+		std::string& templateRealSequenceInfo) {
+	this->templateRealSequenceInfo = templateRealSequenceInfo;
+}
+
+std::string& Template::getTemplateTrueSecondaryStructure() {
+	return templateTrueSecondaryStructure;
+}
+
+void Template::setTemplateTrueSecondaryStructure(
+		std::string& templateTrueSecondaryStructure) {
+	this->templateTrueSecondaryStructure = templateTrueSecondaryStructure;
 }
