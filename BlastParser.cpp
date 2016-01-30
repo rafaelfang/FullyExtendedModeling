@@ -205,8 +205,15 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 				<< "\"," << endl;
 		myfile << "\t\"templateName\":\"" << blastRecords[i].getTemplateName()
 				<< "\"," << endl;
-		myfile << "\t\"templateSequenceInfo\":\""
-				<< blastRecords[i].getTemplateSequenceInfo() << "\"," << endl;
+		myfile << "\t\"templateReferenceSequenceInfo\":\""
+				<< blastRecords[i].getTemplateReferenceSequenceInfo() << "\","
+				<< endl;
+		myfile << "\t\"templateRealSequenceInfo\":\""
+				<< blastRecords[i].getTemplateRealSequenceInfo() << "\","
+				<< endl;
+		myfile << "\t\"templateTrueSecondaryStrucutre\":\""
+				<< blastRecords[i].getTemplateTrueSecondaryStructure() << "\","
+				<< endl;
 		myfile << "\t\"templateSequenceLength\":\""
 				<< blastRecords[i].getTemplateSequenceLength() << "\"," << endl;
 		myfile << "\t\"score\":\"" << blastRecords[i].getScore() << "\","
