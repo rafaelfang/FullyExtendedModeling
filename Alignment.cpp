@@ -14,6 +14,8 @@ Alignment::Alignment() {
 Alignment::~Alignment() {
 	// TODO Auto-generated destructor stub
 }
+
+
 void Alignment::fetchTrimHit() {
 	//initialize the trimString with '-'
 	std::string trimString(targetLength, '-');
@@ -555,4 +557,28 @@ std::string& Alignment::getTrimHit() {
 
 void Alignment::setTrimHit(std::string& trimHit) {
 	this->trimHit = trimHit;
+}
+
+std::string& Alignment::getPredictedSaInfo() {
+	return predicted_sa_info;
+}
+
+void Alignment::setPredictedSaInfo(std::string& predictedSaInfo) {
+	predicted_sa_info = predictedSaInfo;
+}
+
+std::string& Alignment::getPredictedSsConf() {
+	return predicted_ss_conf;
+}
+
+void Alignment::setPredictedSsConf(std::string& predictedSsConf) {
+	predicted_ss_conf = predictedSsConf;
+}
+
+std::string& Alignment::getPredictedSsInfo() {
+	return predicted_ss_info;
+}
+
+void Alignment::setPredictedSsInfo(std::string& predictedSsInfo) {
+	predicted_ss_info = predictedSsInfo;
 }
