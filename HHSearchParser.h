@@ -27,6 +27,7 @@ public:
 	void loadAlignmentsInfo(string, string, string);
 	void storeJsonRecords(string);
 	void storeCoordsAndPDB(string);
+	void storeTrimmedString(std::string);
 
 private:
 	vector<HHSearchAlignment> hhsearchRecords;

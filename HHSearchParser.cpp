@@ -191,7 +191,21 @@ void HHSearchParser::loadAlignmentsInfo(string hhsearchResultFileLocation,
 	}
 
 }
+void HHSearchParser::storeTrimmedString(std::string resultPosition) {
+	ofstream myfile;
+	string outputFile(resultPosition);
+	outputFile += rootName;
+	outputFile += "_hhsearch_trimmedString.txt";
+	myfile.open((char*) outputFile.c_str());
 
+
+	for (int i = 0; i < hhsearchRecords.size(); i++) {
+		myfile << hhsearchRecords[i].getTrimHit()<<endl;
+
+	}
+	myfile << endl;
+	myfile.close();
+}
 void HHSearchParser::storeJsonRecords(string resultPosition) {
 	ofstream myfile;
 	string outputFile(resultPosition);
@@ -261,6 +275,7 @@ void HHSearchParser::storeJsonRecords(string resultPosition) {
 void HHSearchParser::storeCoordsAndPDB(string experimentLocation) {
 	for (int i = 0; i < hhsearchRecords.size(); i++) {
 		hhsearchRecords[i].fetchFullyExtended3DCoords();
+		hhsearchRecords[i].fetchTrimHit();
 		std::string _methodUsed("hhsearch");
 		hhsearchRecords[i].setMethodUsed(_methodUsed);
 		hhsearchRecords[i].storeInCoordsFormat(experimentLocation, 1, i);
