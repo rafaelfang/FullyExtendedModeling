@@ -187,6 +187,21 @@ void BlastParser::loadAlignmentsInfo(string blastResultFileLocation,
 	}
 }
 
+void BlastParser::storeTrimmedString(std::string resultPosition) {
+	ofstream myfile;
+	string outputFile(resultPosition);
+	outputFile += rootName;
+	outputFile += "_blast_trimmedString.txt";
+	myfile.open((char*) outputFile.c_str());
+
+
+	for (int i = 0; i < blastRecords.size(); i++) {
+		myfile << blastRecords[i].getTrimHit()<<endl;
+
+	}
+	myfile << endl;
+	myfile.close();
+}
 void BlastParser::storeJsonRecords(string resultPosition) {
 	ofstream myfile;
 	string outputFile(resultPosition);
@@ -255,6 +270,7 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 void BlastParser::storeCoordsAndPDB(string experimentLocation) {
 	for (int i = 0; i < blastRecords.size(); i++) {
 		blastRecords[i].fetchFullyExtended3DCoords();
+		blastRecords[i].fetchTrimHit();
 		std::string _methodUsed("blast");
 		blastRecords[i].setMethodUsed(_methodUsed);
 		blastRecords[i].storeInCoordsFormat(experimentLocation, 1, i);
