@@ -16,6 +16,69 @@ BlastParser::BlastParser(string _rootName) {
 	setRootName(_rootName);
 }
 
+void BlastParser::loadSecondaryStructureAndSolventAccessibility(
+		std::string SSandSALocation) {
+
+	std::string predictedSecondaryStructure;
+	std::string predictedSecondaryStructureConfidence;
+	std::string predictedSolventAccessibility;
+
+	std::string ssFile(SSandSALocation);
+	ssFile += rootName;
+	ssFile += "/psipred_SS.txt";
+	FILE* fptr = fopen((char*) ssFile.c_str(), "r");
+	if (fptr == NULL) {
+		std::cout << "input file: " << ssFile << " can't open" << std::endl;
+	} else {
+		int lineLength = 5000;
+		char line[lineLength];
+		fgets(line, lineLength, fptr); //get target sequence
+
+		fgets(line, lineLength, fptr); //get predicted secondary structure;
+		std::string s(line);
+		predictedSecondaryStructure = s.erase(
+				s.find_last_not_of(" \n\r\t") + 1);
+
+		fgets(line, lineLength, fptr); //get predicted_ss_conf
+		std::string ss(line);
+		predictedSecondaryStructureConfidence = ss.erase(
+				ss.find_last_not_of(" \n\r\t") + 1);
+
+	}
+	//std::cout << predictedSecondaryStructure << std::endl;
+	//std::cout << predictedSecondaryStructureConfidence << std::endl;
+
+	std::string solventAccessibility;
+	std::string saFile(SSandSALocation);
+	saFile += rootName;
+	saFile += "/sspro_SA.txt";
+	FILE* fptr2 = fopen((char*) saFile.c_str(), "r");
+	if (fptr2 == NULL) {
+		std::cout << "input file: " << saFile << " can't open" << std::endl;
+	} else {
+		int lineLength = 5000;
+		char line[lineLength];
+		fgets(line, lineLength, fptr2); //get target name
+
+		fgets(line, lineLength, fptr2); //get target sequence;
+
+		fgets(line, lineLength, fptr2); //get solvent accessibility
+		std::string s(line);
+		predictedSolventAccessibility = s.erase(
+				s.find_last_not_of(" \n\r\t") + 1);
+
+	}
+
+	//std::cout<<predictedSolventAccessibility<<std::endl;
+	for (int i = 0; i < blastRecords.size(); i++) {
+		blastRecords[i].setPredictedSsInfo(predictedSecondaryStructure);
+		blastRecords[i].setPredictedSsConf(
+				predictedSecondaryStructureConfidence);
+		blastRecords[i].setPredictedSaInfo(predictedSolventAccessibility);
+
+	}
+}
+
 void BlastParser::loadAlignmentsInfo(string blastResultFileLocation,
 		string targetLocation, string templateLocation) {
 	//************************************************************************
@@ -194,9 +257,8 @@ void BlastParser::storeTrimmedString(std::string resultPosition) {
 	outputFile += "_blast_trimmedString.txt";
 	myfile.open((char*) outputFile.c_str());
 
-
 	for (int i = 0; i < blastRecords.size(); i++) {
-		myfile << blastRecords[i].getTrimHit()<<endl;
+		myfile << blastRecords[i].getTrimHit() << endl;
 
 	}
 	myfile << endl;
@@ -229,6 +291,12 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 		myfile << "\t\"templateTrueSecondaryStrucutre\":\""
 				<< blastRecords[i].getTemplateTrueSecondaryStructure() << "\","
 				<< endl;
+		myfile << "\t\"templatePredictedSecondaryStrucutre\":\""
+				<< blastRecords[i].getPredictedSsInfo() << "\"," << endl;
+		myfile << "\t\"templatePredictedSecondaryStructureConfidence\":\""
+				<< blastRecords[i].getPredictedSsConf() << "\"," << endl;
+		myfile << "\t\"templatePredictedSolventAccessibility\":\""
+				<< blastRecords[i].getPredictedSaInfo() << "\"," << endl;
 		myfile << "\t\"templateSequenceLength\":\""
 				<< blastRecords[i].getTemplateSequenceLength() << "\"," << endl;
 		myfile << "\t\"score\":\"" << blastRecords[i].getScore() << "\","
