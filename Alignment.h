@@ -15,12 +15,12 @@ public:
 	Alignment();
 	virtual ~Alignment();
 
+
+	void fetchTrimHit();
 	void fetchFullyExtended3DCoords();
 	void storeInCoordsFormat(std::string, int flag, int id);
 	void storeInPDBFormat(std::string, int flag, int id);
 	string shortName2LongName(char name);
-
-
 
 	int getFullyExtendedEnd();
 	void setFullyExtendedEnd(int fullyExtendedEnd);
@@ -56,6 +56,9 @@ public:
 	void setSubjectPart(std::string& subjectPart);
 	int getSubjectStart();
 	void setSubjectStart(int subjectStart);
+	std::string& getTrimHit();
+	void setTrimHit(std::string& trimHit);
+
 
 protected:
 	int queryStart;
@@ -79,6 +82,8 @@ protected:
 	Point* localAlignment3DCoords;
 	Point* fullyExtendedHeadPart3DCoords;
 	Point* fullyExtendedTailPart3DCoords;
+
+	std::string trimHit;
 
 };
 

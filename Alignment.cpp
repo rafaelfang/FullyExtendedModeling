@@ -14,6 +14,71 @@ Alignment::Alignment() {
 Alignment::~Alignment() {
 	// TODO Auto-generated destructor stub
 }
+void Alignment::fetchTrimHit() {
+	//initialize the trimString with '-'
+	std::string trimString(targetLength, '-');
+
+	//cout << templateName << endl;
+	//cout << "TemplateReference:" << endl;
+	//cout << templateReferenceSequenceInfo << endl;
+	//cout << "TemplateReal:" << endl;
+	//cout << templateRealSequenceInfo << endl;
+	std::string missingPointArray;
+	for (int i = 0; i < templateSequenceLength; i++) {
+		if (templateReferenceSequenceInfo[i] == templateRealSequenceInfo[i]) {
+			missingPointArray += 'n';
+		} else {
+			missingPointArray += 'y';
+		}
+	}
+
+	//cout << "missingPointArray:" << endl;
+	//cout << missingPointArray << endl;
+	std::string trimFlag(subjectPart.length(), '*');
+
+	for (int i = 0; i < subjectPart.length() - 1; i++) {
+		if (queryPart[i] != '-' && queryPart[i + 1] != '-') {
+			trimFlag[i] = 'm'; //current is letter and next is letter, set flag 'm'
+		} else if (queryPart[i] != '-' && queryPart[i + 1] == '-') {
+			trimFlag[i] = '#'; //current is letter and next is gap, set flag '#'
+		} else if (queryPart[i] == '-') {
+			trimFlag[i] = 'd'; //current is gap, set flag '-'
+		}
+
+	}
+
+	//check last position of query
+	if (queryPart[subjectPart.length() - 1] != '-') {
+		trimFlag[subjectPart.length() - 1] = 'm';
+	} else {
+		trimFlag[subjectPart.length() - 1] = 'd';
+	}
+
+	//get rid of the 'd' part from query and subject
+	std::string tempTrim;
+
+	for (int i = 0; i < trimFlag.length(); i++) {
+		if (trimFlag[i] == 'm'
+				&& missingPointArray[i + subjectStart - 1] == 'n') {
+			tempTrim += subjectPart[i];
+		} else if (trimFlag[i] == 'm'
+				&& missingPointArray[i + subjectStart - 1] == 'y') {
+			tempTrim += '+';
+		} else if (trimFlag[i] == '#') {
+
+			tempTrim += '#';
+		} else if (queryPart[i] != '-' && subjectPart[i] == '-') {
+			tempTrim += '-';
+		}
+	}
+	for (int i = 0; i < tempTrim.length(); i++) {
+		trimString[i + queryStart - 1] = tempTrim[i];
+	}
+
+	//cout << trimFlag << endl;
+	//cout << trimString << endl;
+	setTrimHit(trimString);
+}
 
 void Alignment::fetchFullyExtended3DCoords() {
 	Point subjectBigNumber(10000, 10000, 10000);
@@ -32,7 +97,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 
 	}
 	//debugging
-/*
+	/*
 	 std::cout << "subject3DCoords" << std::endl;
 	 for (int i = 0; i < subjectPart.size(); i++) {
 	 std::cout << subject3DCoords[i].getX() << ","
@@ -40,7 +105,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << std::endl;
 	 }
 	 std::cout << "subject3DCoords end" << std::endl;
-*/
+	 */
 	//debugging
 	//copying the coordinates from subject to query
 	Point* tempLocalAlignment3DCoords = (Point*) malloc(
@@ -56,7 +121,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 		}
 	}
 	//debugging
-/*
+	/*
 	 std::cout << "tempLocalAlignment3DCoords" << std::endl;
 	 for (int i = 0; i < queryPart.size(); i++) {
 	 std::cout << tempLocalAlignment3DCoords[i].getX() << ","
@@ -64,7 +129,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << tempLocalAlignment3DCoords[i].getZ() << std::endl;
 	 }
 	 std::cout << "tempLocalAlignment3DCoords end" << std::endl;
-*/
+	 */
 	//debugging
 	//local alignment 3D coordinates
 	localAlignment3DCoords = (Point*) malloc(
@@ -80,7 +145,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	}
 
 	//debugging
-/*
+	/*
 	 std::cout << "localAlignment3DCoords" << std::endl;
 	 for (int i = 0; i < queryPart.size() - queryGaps; i++) {
 	 if (i % 10 == 0) {
@@ -101,7 +166,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 std::cout << localAlignment3DCoords[i].getZ() << "\t";
 	 }
 	 std::cout << "localAlignment3DCoords end" << std::endl;
-*/
+	 */
 	//debugging
 	//local alignment start, part, end
 	localAlignmentStart = queryStart;
@@ -114,7 +179,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	//std::cout << "local alignment end: " << localAlignmentEnd << std::endl;
 	//std::cout << "local alignment part: " << localAlignmentPart << std::endl;
 	//debug
-/*
+	/*
 	 Point* result = localAlignment3DCoords;
 	 int localAlignment3DCoordsSize = localAlignmentEnd - localAlignmentStart
 	 + 1;
@@ -126,7 +191,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 std::cout << result[i].getX() << "\t";
 	 }
 	 std::cout << std::endl;
-*/
+	 */
 	//debug
 	//**********************************************************
 	//fully extended part
@@ -152,7 +217,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	}
 
 	//debug
-/*
+	/*
 	 std::cout << "fully extended head part:" << fullyExtendedHeadPart
 	 << std::endl;
 	 std::cout << "fullyExtendedHeadPart" << std::endl;
@@ -162,7 +227,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 << fullyExtendedHeadPart3DCoords[i].getZ() << std::endl;
 	 }
 	 std::cout << "fullyExtendedHeadPart finish" << std::endl;
-*/
+	 */
 	//debug
 	int numberOfTailToBeExtended = 0;
 	if (localAlignmentEnd > targetLength) {
@@ -188,7 +253,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	}
 
 	//debug
-/*
+	/*
 	 std::cout << "fully extended tail part:" << fullyExtendedTailPart
 	 << std::endl;
 	 std::cout << "fullyExtendedTailPart" << std::endl;
@@ -200,7 +265,7 @@ void Alignment::fetchFullyExtended3DCoords() {
 	 }
 	 std::cout << std::endl;
 	 std::cout << "fullyExtendedTailPart finish" << std::endl;
-*/
+	 */
 	//debug
 }
 
@@ -482,4 +547,12 @@ int Alignment::getSubjectStart() {
 
 void Alignment::setSubjectStart(int subjectStart) {
 	this->subjectStart = subjectStart;
+}
+
+std::string& Alignment::getTrimHit() {
+	return trimHit;
+}
+
+void Alignment::setTrimHit(std::string& trimHit) {
+	this->trimHit = trimHit;
 }
