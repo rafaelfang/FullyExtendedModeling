@@ -16,7 +16,9 @@ Parser::~Parser() {
 	// TODO Auto-generated destructor stub
 }
 
-std::string& Parser::getRootName() {
+
+
+std::string & Parser::getRootName() {
 	return rootName;
 }
 
