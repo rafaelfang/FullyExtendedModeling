@@ -24,6 +24,7 @@ public:
 	BlastParser();
 	BlastParser(string);
 	virtual ~BlastParser();
+	void loadSecondaryStructureAndSolventAccessibility(std::string);
 	void loadAlignmentsInfo(string,string,string);
 	void storeJsonRecords(string);
 	void storeCoordsAndPDB(string);
