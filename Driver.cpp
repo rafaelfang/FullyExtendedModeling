@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 				proteinDatabaseLocation);
 		blastParser.storeJsonRecords(experimentLocation);
 		blastParser.storeCoordsAndPDB(experimentLocation);
+		blastParser.storeTrimmedString(experimentLocation);
 	} else if (strcmp(argv[1], "-hhsearch") == 0) {
 
 		HHSearchParser hhsearchParser(argv[2]);
@@ -34,6 +35,7 @@ int main(int argc, char* argv[]) {
 				targetLocation, proteinDatabaseLocation);
 		hhsearchParser.storeJsonRecords(experimentLocation);
 		hhsearchParser.storeCoordsAndPDB(experimentLocation);
+		hhsearchParser.storeTrimmedString(experimentLocation);
 	}
 
 	/*
