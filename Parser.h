@@ -15,6 +15,7 @@ public:
 
 	virtual ~Parser();
 
+	virtual void loadSecondaryStructureAndSolventAccessibility(std::string)=0;
 	virtual void loadAlignmentsInfo(std::string, std::string, std::string)=0;
 	virtual void storeJsonRecords(std::string)=0;
 	virtual void storeCoordsAndPDB(std::string)=0;
