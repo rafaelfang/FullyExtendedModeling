@@ -23,7 +23,7 @@ public:
 	HHSearchParser();
 	HHSearchParser(string);
 	virtual ~HHSearchParser();
-
+	void loadSecondaryStructureAndSolventAccessibility(std::string);
 	void loadAlignmentsInfo(string, string, string);
 	void storeJsonRecords(string);
 	void storeCoordsAndPDB(string);
