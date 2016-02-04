@@ -58,7 +58,12 @@ public:
 	void setSubjectStart(int subjectStart);
 	std::string& getTrimHit();
 	void setTrimHit(std::string& trimHit);
-
+	std::string& getPredictedSaInfo();
+	void setPredictedSaInfo(std::string& predictedSaInfo);
+	std::string& getPredictedSsConf();
+	void setPredictedSsConf(std::string& predictedSsConf);
+	std::string& getPredictedSsInfo();
+	void setPredictedSsInfo(std::string& predictedSsInfo);
 
 protected:
 	int queryStart;
@@ -84,6 +89,10 @@ protected:
 	Point* fullyExtendedTailPart3DCoords;
 
 	std::string trimHit;
+
+	std::string predicted_ss_info;
+	std::string predicted_sa_info;
+	std::string predicted_ss_conf;
 
 };
 
