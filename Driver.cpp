@@ -19,23 +19,32 @@ int main(int argc, char* argv[]) {
 	std::string targetLocation("/home/cf797/test/casp10Seq/");
 	std::string alignmentResultLocation(
 			"/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob/");
-	std::string experimentLocation("/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob_fullyExtended/");
+	std::string experimentLocation(
+			"/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob_fullyExtended/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
+	std::string secondaryStructureAndSolventAccessibilityLocation(
+			"/home/zlht3/MUFOLD_Data/SSOutput/");
 	if (strcmp(argv[1], "-blast") == 0) {
 		BlastParser blastParser(argv[2]);
 		blastParser.loadAlignmentsInfo(alignmentResultLocation, targetLocation,
 				proteinDatabaseLocation);
+		blastParser.loadSecondaryStructureAndSolventAccessibility(
+				secondaryStructureAndSolventAccessibilityLocation);
 		blastParser.storeJsonRecords(experimentLocation);
 		blastParser.storeCoordsAndPDB(experimentLocation);
 		blastParser.storeTrimmedString(experimentLocation);
+
 	} else if (strcmp(argv[1], "-hhsearch") == 0) {
 
 		HHSearchParser hhsearchParser(argv[2]);
 		hhsearchParser.loadAlignmentsInfo(alignmentResultLocation,
 				targetLocation, proteinDatabaseLocation);
+		hhsearchParser.loadSecondaryStructureAndSolventAccessibility(
+				secondaryStructureAndSolventAccessibilityLocation);
 		hhsearchParser.storeJsonRecords(experimentLocation);
 		hhsearchParser.storeCoordsAndPDB(experimentLocation);
 		hhsearchParser.storeTrimmedString(experimentLocation);
+
 	}
 
 	/*
