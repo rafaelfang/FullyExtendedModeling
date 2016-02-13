@@ -18,12 +18,12 @@ int main(int argc, char* argv[]) {
 
 	std::string targetLocation("/home/cf797/test/casp10Seq/");
 	std::string alignmentResultLocation(
-			"/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob/");
+			"/home/spnf2f/dataset/casp10/old_mufold_gen/");
 	std::string experimentLocation(
-			"/home/cf797/test/casp10_01092013_blastpgp_hhsearch_glob_fullyExtended/");
+			"/home/cf797/test/casp10_05012012_blastpgp_hhsearch_global_fullyExtended/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
 	std::string secondaryStructureAndSolventAccessibilityLocation(
-			"/home/zlht3/MUFOLD_Data/SSOutput/");
+			"/home/spnf2f/dataset/casp10/old_mufold_gen/");
 	if (strcmp(argv[1], "-blast") == 0) {
 		BlastParser blastParser(argv[2]);
 		blastParser.loadAlignmentsInfo(alignmentResultLocation, targetLocation,
