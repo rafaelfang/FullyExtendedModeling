@@ -24,7 +24,7 @@ void HHSearchParser::loadSecondaryStructureAndSolventAccessibility(
 
 	std::string ssFile(SSandSALocation);
 	ssFile += rootName;
-	ssFile += "/psipred_SS.txt";
+	ssFile += "/QueryInfo/psipred_SS.txt";
 	FILE* fptr = fopen((char*) ssFile.c_str(), "r");
 	if (fptr == NULL) {
 		std::cout << "input file: " << ssFile << " can't open" << std::endl;
@@ -50,7 +50,7 @@ void HHSearchParser::loadSecondaryStructureAndSolventAccessibility(
 	std::string solventAccessibility;
 	std::string saFile(SSandSALocation);
 	saFile += rootName;
-	saFile += "/sspro_SA.txt";
+	saFile += "/QueryInfo/sspro_SA.txt";
 	FILE* fptr2 = fopen((char*) saFile.c_str(), "r");
 	if (fptr2 == NULL) {
 		std::cout << "input file: " << saFile << " can't open" << std::endl;
@@ -87,7 +87,7 @@ void HHSearchParser::loadAlignmentsInfo(string hhsearchResultFileLocation,
 
 	string hhsearchResultFile(hhsearchResultFileLocation);
 	hhsearchResultFile += rootName;
-	hhsearchResultFile += "/query.hhr";
+	hhsearchResultFile += "/QueryInfo/query.hhr";
 	cout << hhsearchResultFile << endl;
 	FILE* fptr = fopen((char*) hhsearchResultFile.c_str(), "r");
 	if (fptr == NULL) {
@@ -173,6 +173,10 @@ void HHSearchParser::loadAlignmentsInfo(string hhsearchResultFileLocation,
 				 */
 			} else if (currentState == 'C') {
 
+				if (strstr(line, "ss_pred") != NULL) {
+					fgets(line, lineLength, fptr);	//skip Q ss_pred
+				}
+				//cout<<line<<endl;
 				char queryPart[200];
 				int queryStart, queryEnd;
 
@@ -205,9 +209,13 @@ void HHSearchParser::loadAlignmentsInfo(string hhsearchResultFileLocation,
 				 cout << "query info: " << queryStart << queryPart << queryEnd
 				 << endl;
 				 cout << "subject info: " << subjectStart << subjectPart
-				 << subjectEnd << endl;*/
-
+				 << subjectEnd << endl;
+				 */
 			} else if (currentState == 'D') {
+
+				if (strstr(line, "ss_pred") != NULL) {
+					fgets(line, lineLength, fptr); //skip Q ss_pred
+				}
 
 				char queryPart[200];
 				int queryStart, queryEnd;
