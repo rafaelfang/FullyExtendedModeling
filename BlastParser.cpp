@@ -25,7 +25,7 @@ void BlastParser::loadSecondaryStructureAndSolventAccessibility(
 
 	std::string ssFile(SSandSALocation);
 	ssFile += rootName;
-	ssFile += "/psipred_SS.txt";
+	ssFile += "/QueryInfo/psipred_SS.txt";
 	FILE* fptr = fopen((char*) ssFile.c_str(), "r");
 	if (fptr == NULL) {
 		std::cout << "input file: " << ssFile << " can't open" << std::endl;
@@ -51,7 +51,7 @@ void BlastParser::loadSecondaryStructureAndSolventAccessibility(
 	std::string solventAccessibility;
 	std::string saFile(SSandSALocation);
 	saFile += rootName;
-	saFile += "/sspro_SA.txt";
+	saFile += "/QueryInfo/sspro_SA.txt";
 	FILE* fptr2 = fopen((char*) saFile.c_str(), "r");
 	if (fptr2 == NULL) {
 		std::cout << "input file: " << saFile << " can't open" << std::endl;
@@ -87,7 +87,7 @@ void BlastParser::loadAlignmentsInfo(string blastResultFileLocation,
 	//Alignments information
 	string blastResultFile(blastResultFileLocation);
 	blastResultFile += rootName;
-	blastResultFile += "/query.blaPDB";
+	blastResultFile += "/QueryInfo/query.blaPDB";
 	cout << blastResultFile << endl;
 	FILE* fptr = fopen((char*) blastResultFile.c_str(), "r");
 	if (fptr == NULL) {
