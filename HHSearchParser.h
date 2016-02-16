@@ -1,7 +1,7 @@
 /*
  * HHSearchParser.h
  *
- *  Created on: Nov 14, 2015
+ *  Created on: Oct 24, 2015
  *      Author: Chao
  */
 
@@ -23,13 +23,15 @@ public:
 	HHSearchParser();
 	HHSearchParser(string);
 	virtual ~HHSearchParser();
-	void loadSecondaryStructureAndSolventAccessibility(std::string);
-	void loadAlignmentsInfo(string, string, string);
-	void storeJsonRecords(string);
-	void storeCoordsAndPDB(string);
-	void storeTrimmedString(std::string);
 
+	void parseFile(string);
+
+	void storeCoordinates(string, string);
+
+	void storeRecords(string);
+	void processQueryInsertedResiduesAndSubjectGapsAligned();
 private:
 	vector<HHSearchAlignment> hhsearchRecords;
 };
+
 #endif /* HHSEARCHPARSER_H_ */
