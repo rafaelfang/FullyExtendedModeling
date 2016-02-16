@@ -258,7 +258,7 @@ void BlastParser::storeTrimmedString(std::string resultPosition) {
 	myfile.open((char*) outputFile.c_str());
 
 	for (int i = 0; i < blastRecords.size(); i++) {
-		myfile << blastRecords[i].getTrimHit() << endl;
+		myfile << blastRecords[i].getTemplateName()<<"\t"<<blastRecords[i].getTrimHit() << endl;
 
 	}
 	myfile << endl;
@@ -291,11 +291,11 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 		myfile << "\t\"templateTrueSecondaryStrucutre\":\""
 				<< blastRecords[i].getTemplateTrueSecondaryStructure() << "\","
 				<< endl;
-		myfile << "\t\"templatePredictedSecondaryStrucutre\":\""
+		myfile << "\t\"targetPredictedSecondaryStrucutre\":\""
 				<< blastRecords[i].getPredictedSsInfo() << "\"," << endl;
-		myfile << "\t\"templatePredictedSecondaryStructureConfidence\":\""
+		myfile << "\t\"targetPredictedSecondaryStructureConfidence\":\""
 				<< blastRecords[i].getPredictedSsConf() << "\"," << endl;
-		myfile << "\t\"templatePredictedSolventAccessibility\":\""
+		myfile << "\t\"targetPredictedSolventAccessibility\":\""
 				<< blastRecords[i].getPredictedSaInfo() << "\"," << endl;
 		myfile << "\t\"templateSequenceLength\":\""
 				<< blastRecords[i].getTemplateSequenceLength() << "\"," << endl;
