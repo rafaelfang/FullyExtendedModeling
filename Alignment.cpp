@@ -33,57 +33,53 @@ void Alignment::fetchTrimHit() {
 		}
 	}
 
+	std::string tempPart=subjectPart;
+	int gaps=0;
+	for(int i=0;i<tempPart.size();i++){
+		if(tempPart[i]=='-'){
+			gaps++;
+		}else if(missingPointArray[subjectStart+i-1-gaps]=='y'){
+			tempPart[i]='+';
+		}
+	}
+
 	//cout << "missingPointArray:" << endl;
 	//cout << missingPointArray << endl;
-	std::string trimFlag(subjectPart.length(), '*');
+	std::string flag(tempPart.length(), 'm');
 
-	for (int i = 0; i < subjectPart.length() - 1; i++) {
-		if (queryPart[i] != '-' && queryPart[i + 1] != '-') {
-			trimFlag[i] = 'm'; //current is letter and next is letter, set flag 'm'
-		} else if (queryPart[i] != '-' && queryPart[i + 1] == '-') {
-			trimFlag[i] = '#'; //current is letter and next is gap, set flag '#'
-		} else if (queryPart[i] == '-') {
-			trimFlag[i] = 'd'; //current is gap, set flag '-'
+	for (int i = 0; i < tempPart.length(); i++) {
+		if (queryPart[i] == '-' && tempPart[i] != '-') {
+			flag[i] = 'd';
+		}
+	}
+
+	for (int i = 1;i<tempPart.length();i++){
+		if(flag[i]=='d'&&flag[i-1]=='m'){
+			flag[i-1]='#';
+		}
+	}
+
+
+	//cout << "flag" << endl;
+	//cout << flag << endl;
+	std::string temp;
+	for (int i = 0; i < tempPart.length(); i++) {
+		if (flag[i] == 'm') {
+			temp += tempPart[i];
+		} else if (flag[i] == '#') {
+			temp += '#';
+		} else if (flag[i] == 'd') {
+			continue;
 		}
 
 	}
 
-	//check last position of query
-	if (queryPart[subjectPart.length() - 1] != '-') {
-		trimFlag[subjectPart.length() - 1] = 'm';
-	} else {
-		trimFlag[subjectPart.length() - 1] = 'd';
+	//cout << "temp" << endl;
+	//cout << temp << endl;
+	for (int i = 0; i < temp.size(); i++) {
+		trimString[queryStart + i - 1] = temp[i];
 	}
-	//cout<<"queryPart"<<endl;
-	//cout<<queryPart<<endl;
-	//cout<<"subjectPart"<<endl;
-	//cout<<subjectPart<<endl;
-	//cout<<"trimFlag"<<endl;
-	//cout<<trimFlag<<endl;
-
-	//get rid of the 'd' part from query and subject
-	std::string tempTrim;
-
-	for (int i = 0; i < trimFlag.length(); i++) {
-		if (trimFlag[i] == 'm'
-				&& missingPointArray[i + subjectStart - 1] == 'n') {
-			tempTrim += subjectPart[i];
-		} else if (trimFlag[i] == 'm'
-				&& missingPointArray[i + subjectStart - 1] == 'y') {
-			tempTrim += '+';
-		} else if (trimFlag[i] == '#') {
-
-			tempTrim += '#';
-		} else if (queryPart[i] != '-' && subjectPart[i] == '-') {
-			tempTrim += '-';
-		}
-	}
-	for (int i = 0; i < tempTrim.length(); i++) {
-		trimString[i + queryStart - 1] = tempTrim[i];
-	}
-
-	//cout << trimFlag << endl;
-	//cout<<"trimString"<<endl;
+	//cout << "trimString" << endl;
 	//cout << trimString << endl;
 	setTrimHit(trimString);
 }
