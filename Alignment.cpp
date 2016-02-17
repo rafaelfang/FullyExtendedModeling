@@ -43,19 +43,17 @@ void Alignment::fetchTrimHit() {
 		}
 	}
 
-	//cout << "missingPointArray:" << endl;
-	//cout << missingPointArray << endl;
-	std::string flag(tempPart.length(), 'm');
+
 
 	for (int i = 0; i < tempPart.length(); i++) {
 		if (queryPart[i] == '-' && tempPart[i] != '-') {
-			flag[i] = 'd';
+			tempPart[i] = 'd';
 		}
 	}
 
 	for (int i = 1;i<tempPart.length();i++){
-		if(flag[i]=='d'&&flag[i-1]=='m'){
-			flag[i-1]='#';
+		if(tempPart[i]=='d'&&tempPart[i-1]!='d'&&tempPart[i-1]!='+'){
+			tempPart[i-1]='#';
 		}
 	}
 
@@ -64,12 +62,10 @@ void Alignment::fetchTrimHit() {
 	//cout << flag << endl;
 	std::string temp;
 	for (int i = 0; i < tempPart.length(); i++) {
-		if (flag[i] == 'm') {
-			temp += tempPart[i];
-		} else if (flag[i] == '#') {
-			temp += '#';
-		} else if (flag[i] == 'd') {
+		if(tempPart[i]=='d'){
 			continue;
+		}else{
+			temp+=tempPart[i];
 		}
 
 	}
