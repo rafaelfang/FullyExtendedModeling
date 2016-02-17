@@ -251,13 +251,15 @@ void BlastParser::loadAlignmentsInfo(string blastResultFileLocation,
 }
 
 void BlastParser::storeTrimmedString(std::string resultPosition) {
+
 	ofstream myfile;
 	string outputFile(resultPosition);
 	outputFile += rootName;
 	outputFile += "_blast_trimmedString.txt";
 	myfile.open((char*) outputFile.c_str());
 
-	for (int i = 0; i < blastRecords.size(); i++) {
+	for (int i = 1; i < blastRecords.size(); i++) {
+
 		myfile << blastRecords[i].getTemplateName()<<"\t"<<blastRecords[i].getTrimHit() << endl;
 
 	}
@@ -309,6 +311,8 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 				<< "%\"," << endl;
 		myfile << "\t\"gaps\":\"" << blastRecords[i].getGaps() << "%\","
 				<< endl;
+		myfile << "\t\"trimString\":\"" << blastRecords[i].getTrimHit() << "\","
+						<< endl;
 		myfile << "\t\"queryStart\":\"" << blastRecords[i].getQueryStart()
 				<< "\"," << endl;
 		myfile << "\t\"queryPart\":\"" << blastRecords[i].getQueryPart()
