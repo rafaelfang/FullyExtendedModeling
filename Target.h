@@ -17,6 +17,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include "Point.h"
+
 class Target {
 public:
 	Target();

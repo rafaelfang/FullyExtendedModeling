@@ -57,18 +57,16 @@ void Target::loadTargetInfo(std::string targetLocation) {
 
 		int lineLength = 5000;
 		char line[lineLength];
-		fgets(line, lineLength, f);
-		fgets(line, lineLength, f);
-		std::string s(line);
-		targetSequence = s.erase(s.find_last_not_of(" \n\r\t") + 1);
 
-		int numberOfChars = 0;
-		while (line[numberOfChars] != '\0') {
+		fgets(line, lineLength, f);
+		fscanf (f, "%s", line);
 
-			numberOfChars++;
-		}
-		numberOfChars--;
-		targetLength = numberOfChars;
+		//cout<<line<<endl;
+		targetSequence=line;
+
+
+		//cout<<targetSequence.size()<<endl;
+		targetLength = targetSequence.size();
 	}
 	fclose(f);
 }
