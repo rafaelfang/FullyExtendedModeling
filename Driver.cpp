@@ -12,18 +12,20 @@
 #include "Alignment.h"
 #include "BlastParser.h"
 #include "HHSearchParser.h"
+#include "CNFSearchParser.h"
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
 
-	std::string targetLocation("/home/cf797/test/casp10Seq/");
+	std::string targetLocation("/home/cf797/test/casp11Seq/");
 	std::string alignmentResultLocation(
-			"/home/spnf2f/dataset/casp10/old_mufold_gen/");
+			"/home/spnf2f/dataset/casp11/old_mufold_gen/");
 	std::string experimentLocation(
-			"/home/cf797/test/casp10_05012012_blastpgp_hhsearch_global_fullyExtended/");
+			"/home/cf797/test/casp11_04302014_blastpgp_hhsearch_global_fullyExtended/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
 	std::string secondaryStructureAndSolventAccessibilityLocation(
-			"/home/spnf2f/dataset/casp10/old_mufold_gen/");
+			"/home/spnf2f/dataset/casp11/old_mufold_gen/");
+	std::string cnfResultLocation("/home/cf797/test/casp11Alignment/");
 	if (strcmp(argv[1], "-blast") == 0) {
 		BlastParser blastParser(argv[2]);
 		blastParser.loadAlignmentsInfo(alignmentResultLocation, targetLocation,
@@ -47,6 +49,16 @@ int main(int argc, char* argv[]) {
 
 		hhsearchParser.storeTrimmedString(experimentLocation);
 
+	}else if(strcmp(argv[1], "-cnf") == 0){
+		CNFSearchParser cnfsearchParser(argv[2]);
+		cnfsearchParser.loadAlignmentsInfo(cnfResultLocation,
+				targetLocation, proteinDatabaseLocation);
+		cnfsearchParser.loadSecondaryStructureAndSolventAccessibility(
+						secondaryStructureAndSolventAccessibilityLocation);
+		cnfsearchParser.storeCoordsAndPDB(experimentLocation);
+		cnfsearchParser.storeJsonRecords(experimentLocation);
+
+		cnfsearchParser.storeTrimmedString(experimentLocation);
 	}
 
 	/*
