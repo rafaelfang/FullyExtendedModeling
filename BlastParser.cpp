@@ -258,7 +258,7 @@ void BlastParser::storeTrimmedString(std::string resultPosition) {
 	outputFile += "_blast_trimmedString.txt";
 	myfile.open((char*) outputFile.c_str());
 
-	for (int i = 1; i < blastRecords.size(); i++) {
+	for (int i = 0; i < blastRecords.size(); i++) {
 
 		myfile << blastRecords[i].getTemplateName()<<"\t"<<blastRecords[i].getTrimHit() << endl;
 
