@@ -1,5 +1,5 @@
-fullyExtendedModeling: HHSearchParser.o HHSearchAlignment.o BlastParser.o Parser.o BlastAlignment.o Alignment.o Point.o Target.o Template.o Driver.o
-	g++	HHSearchParser.o HHSearchAlignment.o BlastParser.o Parser.o BlastAlignment.o  Alignment.o  Point.o Target.o Template.o Driver.o -o fullyExtendedModeling
+fullyExtendedModeling: CNFSearchParser.o CNFSearchAlignment.o HHSearchParser.o HHSearchAlignment.o BlastParser.o Parser.o BlastAlignment.o Alignment.o Point.o Target.o Template.o Driver.o
+	g++	CNFSearchParser.o CNFSearchAlignment.o HHSearchParser.o HHSearchAlignment.o BlastParser.o Parser.o BlastAlignment.o  Alignment.o  Point.o Target.o Template.o Driver.o -o fullyExtendedModeling
 
 
 Alignment.o: Alignment.cpp
@@ -10,7 +10,13 @@ BlastParser.o: BlastParser.cpp
 	
 BlastAlignment.o: BlastAlignment.cpp
 	g++ -c BlastAlignment.cpp
-
+	
+CNFSearchParser.o: CNFSearchParser.cpp
+	g++ -c CNFSearchParser.cpp
+	
+CNFSearchAlignment.o: CNFSearchAlignment.cpp
+	g++ -c CNFSearchAlignment.cpp
+	
 HHSearchParser.o: HHSearchParser.cpp
 	g++ -c HHSearchParser.cpp
 	
