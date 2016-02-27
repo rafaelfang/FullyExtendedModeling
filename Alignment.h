@@ -15,7 +15,8 @@ public:
 	Alignment();
 	virtual ~Alignment();
 
-
+	void generateDSSPFiles(std::string,std::string,int id);
+	void generateBetaSheetFile(std::string,int id);
 	void fetchTrimHit();
 	void fetchFullyExtended3DCoords();
 	void storeInCoordsFormat(std::string, int flag, int id);

@@ -33,17 +33,15 @@ void Alignment::fetchTrimHit() {
 		}
 	}
 
-	std::string tempPart=subjectPart;
-	int gaps=0;
-	for(int i=0;i<tempPart.size();i++){
-		if(tempPart[i]=='-'){
+	std::string tempPart = subjectPart;
+	int gaps = 0;
+	for (int i = 0; i < tempPart.size(); i++) {
+		if (tempPart[i] == '-') {
 			gaps++;
-		}else if(missingPointArray[subjectStart+i-1-gaps]=='y'){
-			tempPart[i]='+';
+		} else if (missingPointArray[subjectStart + i - 1 - gaps] == 'y') {
+			tempPart[i] = '+';
 		}
 	}
-
-
 
 	for (int i = 0; i < tempPart.length(); i++) {
 		if (queryPart[i] == '-' && tempPart[i] != '-') {
@@ -51,21 +49,21 @@ void Alignment::fetchTrimHit() {
 		}
 	}
 
-	for (int i = 1;i<tempPart.length();i++){
-		if(tempPart[i]=='d'&&tempPart[i-1]!='d'&&tempPart[i-1]!='+'){
-			tempPart[i-1]='#';
+	for (int i = 1; i < tempPart.length(); i++) {
+		if (tempPart[i] == 'd' && tempPart[i - 1] != 'd'
+				&& tempPart[i - 1] != '+') {
+			tempPart[i - 1] = '#';
 		}
 	}
-
 
 	//cout << "flag" << endl;
 	//cout << flag << endl;
 	std::string temp;
 	for (int i = 0; i < tempPart.length(); i++) {
-		if(tempPart[i]=='d'){
+		if (tempPart[i] == 'd') {
 			continue;
-		}else{
-			temp+=tempPart[i];
+		} else {
+			temp += tempPart[i];
 		}
 
 	}
@@ -302,7 +300,71 @@ void Alignment::storeInCoordsFormat(std::string experimentLocation, int flag,
 	}
 	myfile.close();
 }
+void Alignment::generateDSSPFiles(std::string experimentLocation,
+		std::string templatePDBLocation, int id) {
+	std::string outputFile(experimentLocation);
+	outputFile += targetName;
+	outputFile += "/";
+	outputFile += methodUsed;
+	outputFile += "_";
+	outputFile += targetName;
+	outputFile += "_";
+	char buffer[10];
+	sprintf(buffer, "%d", id);
+	outputFile += buffer;
+	outputFile += "_";
+	outputFile += templateName;
+	outputFile += ".dssp";
 
+	std::string inputFile(templatePDBLocation);
+	inputFile += templateName;
+	inputFile += ".pdb";
+
+	std::string command("dssp");
+	command += " -i ";
+	command += inputFile;
+	command += " -o ";
+	command += outputFile;
+	//std::cout<<command<<endl;
+	int returnVal = system((char*) command.c_str());
+	if (returnVal != 0) {
+		cout << templateName << " file not exist in " << templatePDBLocation
+				<< endl;
+	}
+}
+
+void Alignment::generateBetaSheetFile(std::string experimentLocation, int id) {
+	std::string inputFileName(experimentLocation);
+	inputFileName += targetName;
+	inputFileName += "/";
+	inputFileName += methodUsed;
+	inputFileName += "_";
+	inputFileName += targetName;
+	inputFileName += "_";
+	char buffer[10];
+	sprintf(buffer, "%d", id);
+	inputFileName += buffer;
+	inputFileName += "_";
+	inputFileName += templateName;
+	inputFileName += ".dssp";
+	FILE * inputFilePtr = fopen((char*) inputFileName.c_str(), "r");
+	if (inputFilePtr == NULL) {
+		cout << inputFileName << " not exist due to the pdb file not exist"
+				<< endl;
+	} else {
+		int lineLength = 5000;
+		char line[lineLength];
+		while (fgets(line, lineLength, inputFilePtr) != NULL) {
+			if ((strstr(line, "  #  RESIDUE AA") != NULL)) {
+				break;
+			}
+		}
+		//iterate until   #  RESIDUE AA
+		while (fgets(line, lineLength, inputFilePtr) != NULL) {
+			cout<<line<<endl;
+		}
+	}
+}
 void Alignment::storeInPDBFormat(std::string experimentLocation, int flag,
 		int id) {
 	std::ofstream myfile;
@@ -417,7 +479,7 @@ void Alignment::setFullyExtendedEnd(int fullyExtendedEnd) {
 	this->fullyExtendedEnd = fullyExtendedEnd;
 }
 
-std::string& Alignment::getFullyExtendedHeadPart() {
+std::string & Alignment::getFullyExtendedHeadPart() {
 	return fullyExtendedHeadPart;
 }
 
@@ -425,7 +487,7 @@ void Alignment::setFullyExtendedHeadPart(std::string& fullyExtendedHeadPart) {
 	this->fullyExtendedHeadPart = fullyExtendedHeadPart;
 }
 
-Point*& Alignment::getFullyExtendedHeadPart3DCoords() {
+Point * &Alignment::getFullyExtendedHeadPart3DCoords() {
 	return fullyExtendedHeadPart3DCoords;
 }
 
@@ -442,7 +504,7 @@ void Alignment::setFullyExtendedStart(int fullyExtendedStart) {
 	this->fullyExtendedStart = fullyExtendedStart;
 }
 
-std::string& Alignment::getFullyExtendedTailPart() {
+std::string & Alignment::getFullyExtendedTailPart() {
 	return fullyExtendedTailPart;
 }
 
@@ -450,7 +512,7 @@ void Alignment::setFullyExtendedTailPart(std::string& fullyExtendedTailPart) {
 	this->fullyExtendedTailPart = fullyExtendedTailPart;
 }
 
-Point*& Alignment::getFullyExtendedTailPart3DCoords() {
+Point * &Alignment::getFullyExtendedTailPart3DCoords() {
 	return fullyExtendedTailPart3DCoords;
 }
 
@@ -459,7 +521,7 @@ void Alignment::setFullyExtendedTailPart3DCoords(
 	this->fullyExtendedTailPart3DCoords = fullyExtendedTailPart3DCoords;
 }
 
-Point*& Alignment::getLocalAlignment3DCoords() {
+Point * &Alignment::getLocalAlignment3DCoords() {
 	return localAlignment3DCoords;
 }
 
@@ -475,7 +537,7 @@ void Alignment::setLocalAlignmentEnd(int localAlignmentEnd) {
 	this->localAlignmentEnd = localAlignmentEnd;
 }
 
-std::string& Alignment::getLocalAlignmentPart() {
+std::string & Alignment::getLocalAlignmentPart() {
 	return localAlignmentPart;
 }
 
@@ -499,7 +561,7 @@ void Alignment::setQueryEnd(int queryEnd) {
 	this->queryEnd = queryEnd;
 }
 
-std::string& Alignment::getQueryPart() {
+std::string & Alignment::getQueryPart() {
 	return queryPart;
 }
 
@@ -523,7 +585,7 @@ void Alignment::setSubjectEnd(int subjectEnd) {
 	this->subjectEnd = subjectEnd;
 }
 
-std::string& Alignment::getSubjectPart() {
+std::string & Alignment::getSubjectPart() {
 	return subjectPart;
 }
 
@@ -539,7 +601,7 @@ void Alignment::setSubjectStart(int subjectStart) {
 	this->subjectStart = subjectStart;
 }
 
-std::string& Alignment::getTrimHit() {
+std::string & Alignment::getTrimHit() {
 	return trimHit;
 }
 
@@ -547,7 +609,7 @@ void Alignment::setTrimHit(std::string& trimHit) {
 	this->trimHit = trimHit;
 }
 
-std::string& Alignment::getPredictedSaInfo() {
+std::string & Alignment::getPredictedSaInfo() {
 	return predicted_sa_info;
 }
 
@@ -555,7 +617,7 @@ void Alignment::setPredictedSaInfo(std::string& predictedSaInfo) {
 	predicted_sa_info = predictedSaInfo;
 }
 
-std::string& Alignment::getPredictedSsConf() {
+std::string & Alignment::getPredictedSsConf() {
 	return predicted_ss_conf;
 }
 
@@ -563,7 +625,7 @@ void Alignment::setPredictedSsConf(std::string& predictedSsConf) {
 	predicted_ss_conf = predictedSsConf;
 }
 
-std::string& Alignment::getPredictedSsInfo() {
+std::string & Alignment::getPredictedSsInfo() {
 	return predicted_ss_info;
 }
 
