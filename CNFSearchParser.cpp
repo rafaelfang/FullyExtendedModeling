@@ -248,6 +248,9 @@ void CNFSearchParser::storeJsonRecords(string resultPosition) {
 	myfile << "{\"" << rootName << "\":[" << endl;
 	for (int i = 0; i < cnfsearchRecords.size(); i++) {
 		myfile << "\t{" << endl;
+		myfile << "\t\"fileID\":\"" << "cnf_"
+				<< cnfsearchRecords[i].getTargetName() << "_" << i << "_"
+				<< cnfsearchRecords[i].getTemplateName() << "\"," << endl;
 		myfile << "\t\"targetName\":\"" << cnfsearchRecords[i].getTargetName()
 				<< "\"," << endl;
 		myfile << "\t\"targetFullSequence\":\""
