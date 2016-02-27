@@ -260,7 +260,8 @@ void BlastParser::storeTrimmedString(std::string resultPosition) {
 
 	for (int i = 0; i < blastRecords.size(); i++) {
 
-		myfile << blastRecords[i].getTemplateName()<<"\t"<<blastRecords[i].getTrimHit() << endl;
+		myfile << blastRecords[i].getTemplateName() << "\t"
+				<< blastRecords[i].getTrimHit() << endl;
 
 	}
 	myfile << endl;
@@ -276,6 +277,9 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 	myfile << "{\"" << rootName << "\":[" << endl;
 	for (int i = 0; i < blastRecords.size(); i++) {
 		myfile << "\t{" << endl;
+		myfile << "\t\"fileID\":\"" << "blast_"
+				<< blastRecords[i].getTargetName() << "_" << i << "_"
+				<< blastRecords[i].getTemplateName() << "\"," << endl;
 		myfile << "\t\"targetName\":\"" << blastRecords[i].getTargetName()
 				<< "\"," << endl;
 		myfile << "\t\"targetFullSequence\":\""
@@ -312,7 +316,7 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 		myfile << "\t\"gaps\":\"" << blastRecords[i].getGaps() << "%\","
 				<< endl;
 		myfile << "\t\"trimString\":\"" << blastRecords[i].getTrimHit() << "\","
-						<< endl;
+				<< endl;
 		myfile << "\t\"queryStart\":\"" << blastRecords[i].getQueryStart()
 				<< "\"," << endl;
 		myfile << "\t\"queryPart\":\"" << blastRecords[i].getQueryPart()
