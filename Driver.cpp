@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 	std::string experimentLocation(
 			"/home/cf797/test/casp11_04302014_blastpgp_hhsearch_global_fullyExtended/");
 	std::string proteinDatabaseLocation("/home/lihongb/DATABASE/DBInfo/");
+	std::string templatePDBLocation("/home/lihongb/DATABASE/PDBALL/");
 	std::string secondaryStructureAndSolventAccessibilityLocation(
 			"/home/spnf2f/dataset/casp11/old_mufold_gen/");
 	std::string cnfResultLocation("/home/cf797/test/casp11Alignment/");
@@ -36,6 +37,7 @@ int main(int argc, char* argv[]) {
 		blastParser.storeJsonRecords(experimentLocation);
 
 		blastParser.storeTrimmedString(experimentLocation);
+		blastParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
 
 	} else if (strcmp(argv[1], "-hhsearch") == 0) {
 
