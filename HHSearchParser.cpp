@@ -269,7 +269,8 @@ void HHSearchParser::storeTrimmedString(std::string resultPosition) {
 	myfile.open((char*) outputFile.c_str());
 
 	for (int i = 0; i < hhsearchRecords.size(); i++) {
-		myfile << hhsearchRecords[i].getTemplateName()<<"\t"<<hhsearchRecords[i].getTrimHit() << endl;
+		myfile << hhsearchRecords[i].getTemplateName() << "\t"
+				<< hhsearchRecords[i].getTrimHit() << endl;
 
 	}
 	myfile << endl;
@@ -285,6 +286,9 @@ void HHSearchParser::storeJsonRecords(string resultPosition) {
 	myfile << "{\"" << rootName << "\":[" << endl;
 	for (int i = 0; i < hhsearchRecords.size(); i++) {
 		myfile << "\t{" << endl;
+		myfile << "\t\"fileID\":\"" << "hhsearch_"
+				<< hhsearchRecords[i].getTargetName() << "_" << i << "_"
+				<< hhsearchRecords[i].getTemplateName() << "\"," << endl;
 		myfile << "\t\"targetName\":\"" << hhsearchRecords[i].getTargetName()
 				<< "\"," << endl;
 		myfile << "\t\"targetFullSequence\":\""
@@ -322,8 +326,8 @@ void HHSearchParser::storeJsonRecords(string resultPosition) {
 				<< hhsearchRecords[i].getAlignedColumns() << "\"," << endl;
 		myfile << "\t\"identities\":\"" << hhsearchRecords[i].getIdentities()
 				<< "%\"," << endl;
-		myfile << "\t\"trimHit\":\"" << hhsearchRecords[i].getTrimHit()
-						<< "\"," << endl;
+		myfile << "\t\"trimHit\":\"" << hhsearchRecords[i].getTrimHit() << "\","
+				<< endl;
 		myfile << "\t\"queryStart\":\"" << hhsearchRecords[i].getQueryStart()
 				<< "\"," << endl;
 		myfile << "\t\"queryPart\":\"" << hhsearchRecords[i].getQueryPart()
