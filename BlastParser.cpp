@@ -15,7 +15,12 @@ BlastParser::BlastParser(string _rootName) {
 	// TODO Auto-generated ructor stub
 	setRootName(_rootName);
 }
-
+void BlastParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
+	for(int i=0;i<blastRecords.size();i++){
+		blastRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
+		blastRecords[i].generateBetaSheetFile(experimentLocation,i);
+	}
+}
 void BlastParser::loadSecondaryStructureAndSolventAccessibility(
 		std::string SSandSALocation) {
 
