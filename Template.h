@@ -34,6 +34,7 @@ public:
 	void setTemplateTrueSecondaryStructure(
 			std::string& templateTrueSecondaryStructure);
 
+
 protected:
 	std::string templateName;
 	std::string templateReferenceSequenceInfo;
