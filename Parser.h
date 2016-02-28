@@ -20,6 +20,7 @@ public:
 	virtual void storeJsonRecords(std::string)=0;
 	virtual void storeCoordsAndPDB(std::string)=0;
 	virtual void storeTrimmedString(std::string)=0;
+	virtual void batchGenerateDSSP(std::string,std::string)=0;
 
 	std::string& getRootName();
 	void setRootName(std::string& rootName);
