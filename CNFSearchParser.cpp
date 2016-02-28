@@ -15,7 +15,12 @@ CNFSearchParser::CNFSearchParser(string _rootName) {
 	// TODO Auto-generated constructor stub
 	setRootName(_rootName);
 }
-
+void CNFSearchParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
+	for(int i=0;i<cnfsearchRecords.size();i++){
+		cnfsearchRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
+		cnfsearchRecords[i].generateBetaSheetFile(experimentLocation,i);
+	}
+}
 void CNFSearchParser::loadSecondaryStructureAndSolventAccessibility(
 		std::string SSandSALocation) {
 	std::string predictedSecondaryStructure;
