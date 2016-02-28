@@ -354,6 +354,21 @@ void Alignment::generateBetaSheetFile(std::string experimentLocation, int id) {
 	} else {
 		int lineLength = 5000;
 		char line[lineLength];
+		std::string outputFile(experimentLocation);
+		outputFile += targetName;
+		outputFile += "/";
+		outputFile += methodUsed;
+		outputFile += "_";
+		outputFile += targetName;
+		outputFile += "_";
+		char buffer[10];
+		sprintf(buffer, "%d", id);
+		outputFile += buffer;
+		outputFile += "_";
+		outputFile += templateName;
+		outputFile += ".betaSheet";
+		FILE *pFile = fopen((char*) outputFile.c_str(), "w");
+		fprintf(pFile, "residue,BP1,BP2\n");
 		while (fgets(line, lineLength, inputFilePtr) != NULL) {
 			if ((strstr(line, "  #  RESIDUE AA") != NULL)) {
 				break;
@@ -361,8 +376,29 @@ void Alignment::generateBetaSheetFile(std::string experimentLocation, int id) {
 		}
 		//iterate until   #  RESIDUE AA
 		while (fgets(line, lineLength, inputFilePtr) != NULL) {
-			cout<<line<<endl;
+			int residue;
+			int BP1;
+			int BP2;
+			char BP2Letter[3];
+			sscanf(line + 6, "%d", &residue);
+			sscanf(line + 26, "%d", &BP1);
+			sscanf(line + 30, "%d", &BP2);
+			if (BP1 == 0 && BP2 == 0) {
+				continue;
+			} else {
+				sscanf(line + 33, "%s", BP2Letter);
+
+				fprintf(pFile, "%d,%d,%d%s\n", residue, BP1, BP2, BP2Letter);
+
+				//cout << residue << "," << BP1 << "," << BP2 << "," << BP2Letter
+				//		<< endl;
+
+
+			}
+
 		}
+		fclose(pFile);
+
 	}
 }
 void Alignment::storeInPDBFormat(std::string experimentLocation, int flag,
@@ -632,3 +668,5 @@ std::string & Alignment::getPredictedSsInfo() {
 void Alignment::setPredictedSsInfo(std::string& predictedSsInfo) {
 	predicted_ss_info = predictedSsInfo;
 }
+
+

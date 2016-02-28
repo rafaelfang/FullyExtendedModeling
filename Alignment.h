@@ -15,8 +15,8 @@ public:
 	Alignment();
 	virtual ~Alignment();
 
-	void generateDSSPFiles(std::string,std::string,int id);
-	void generateBetaSheetFile(std::string,int id);
+	void generateDSSPFiles(std::string, std::string, int id);
+	void generateBetaSheetFile(std::string, int id);
 	void fetchTrimHit();
 	void fetchFullyExtended3DCoords();
 	void storeInCoordsFormat(std::string, int flag, int id);
@@ -66,6 +66,7 @@ public:
 	std::string& getPredictedSsInfo();
 	void setPredictedSsInfo(std::string& predictedSsInfo);
 
+
 protected:
 	int queryStart;
 	std::string queryPart;
@@ -90,6 +91,7 @@ protected:
 	Point* fullyExtendedTailPart3DCoords;
 
 	std::string trimHit;
+
 
 	std::string predicted_ss_info;
 	std::string predicted_sa_info;
