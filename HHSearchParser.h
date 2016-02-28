@@ -28,6 +28,7 @@ public:
 	void storeJsonRecords(string);
 	void storeCoordsAndPDB(string);
 	void storeTrimmedString(std::string);
+	void batchGenerateDSSP(std::string,std::string);
 
 private:
 	vector<HHSearchAlignment> hhsearchRecords;

@@ -15,6 +15,12 @@ HHSearchParser::HHSearchParser(string _rootName) {
 	// TODO Auto-generated constructor stub
 	setRootName(_rootName);
 }
+void HHSearchParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
+	for(int i=0;i<hhsearchRecords.size();i++){
+		hhsearchRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
+		hhsearchRecords[i].generateBetaSheetFile(experimentLocation,i);
+	}
+}
 void HHSearchParser::loadSecondaryStructureAndSolventAccessibility(
 		std::string SSandSALocation) {
 
