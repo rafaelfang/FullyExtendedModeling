@@ -50,6 +50,7 @@ int main(int argc, char* argv[]) {
 		hhsearchParser.storeJsonRecords(experimentLocation);
 
 		hhsearchParser.storeTrimmedString(experimentLocation);
+		hhsearchParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
 
 	}else if(strcmp(argv[1], "-cnf") == 0){
 		CNFSearchParser cnfsearchParser(argv[2]);
@@ -61,6 +62,7 @@ int main(int argc, char* argv[]) {
 		cnfsearchParser.storeJsonRecords(experimentLocation);
 
 		cnfsearchParser.storeTrimmedString(experimentLocation);
+		cnfsearchParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
 	}
 
 	/*
