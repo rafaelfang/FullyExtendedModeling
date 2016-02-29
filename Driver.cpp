@@ -37,9 +37,8 @@ int main(int argc, char* argv[]) {
 				secondaryStructureAndSolventAccessibilityLocation);
 		blastParser.storeCoordsAndPDB(experimentLocation);
 
-
 		blastParser.storeTrimmedString(experimentLocation);
-		//blastParser.batchGenerateDSSP(experimentLocation, templatePDBLocation);
+		blastParser.batchGenerateDSSP(experimentLocation, templatePDBLocation);
 		blastParser.batchGenerateTMScore(experimentLocation,
 				TMScoreToolLocation, targetTruePDBLocation);
 		blastParser.storeJsonRecords(experimentLocation);
@@ -52,10 +51,9 @@ int main(int argc, char* argv[]) {
 				secondaryStructureAndSolventAccessibilityLocation);
 		hhsearchParser.storeCoordsAndPDB(experimentLocation);
 
-
 		hhsearchParser.storeTrimmedString(experimentLocation);
-		//hhsearchParser.batchGenerateDSSP(experimentLocation,
-		//		templatePDBLocation);
+		hhsearchParser.batchGenerateDSSP(experimentLocation,
+				templatePDBLocation);
 		hhsearchParser.batchGenerateTMScore(experimentLocation,
 				TMScoreToolLocation, targetTruePDBLocation);
 		hhsearchParser.storeJsonRecords(experimentLocation);
@@ -72,7 +70,7 @@ int main(int argc, char* argv[]) {
 		cnfsearchParser.batchGenerateDSSP(experimentLocation,
 				templatePDBLocation);
 		cnfsearchParser.batchGenerateTMScore(experimentLocation,
-						TMScoreToolLocation, targetTruePDBLocation);
+				TMScoreToolLocation, targetTruePDBLocation);
 		cnfsearchParser.storeJsonRecords(experimentLocation);
 
 	}
