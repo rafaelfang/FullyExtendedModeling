@@ -15,6 +15,15 @@ HHSearchParser::HHSearchParser(string _rootName) {
 	// TODO Auto-generated constructor stub
 	setRootName(_rootName);
 }
+
+void HHSearchParser::batchGenerateTMScore(std::string experimentLocation,
+		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
+	for (int i = 0; i < hhsearchRecords.size(); i++) {
+		//hhsearchRecords[i].generateTMScoreFiles(experimentLocation,
+		//		TMScoreToolLocation, targetTruePDBLocation, i);
+		hhsearchRecords[i].fetchTMScore(experimentLocation, i);
+	}
+}
 void HHSearchParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
 	for(int i=0;i<hhsearchRecords.size();i++){
 		hhsearchRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
@@ -321,7 +330,10 @@ void HHSearchParser::storeJsonRecords(string resultPosition) {
 		myfile << "\t\"templateSequenceLength\":\""
 				<< hhsearchRecords[i].getTemplateSequenceLength() << "\","
 				<< endl;
-
+		myfile << "\t\"tmScore\":\"" << hhsearchRecords[i].getTmScore() << "\","
+						<< endl;
+		myfile << "\t\"gdttsScore\":\"" << hhsearchRecords[i].getGdttsScore() << "\","
+						<< endl;
 		myfile << "\t\"probab\":\"" << hhsearchRecords[i].getProbab() << "\","
 				<< endl;
 		myfile << "\t\"expect\":\"" << hhsearchRecords[i].getExpect() << "\","
