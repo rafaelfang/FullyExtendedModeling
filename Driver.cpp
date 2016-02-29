@@ -27,6 +27,8 @@ int main(int argc, char* argv[]) {
 	std::string secondaryStructureAndSolventAccessibilityLocation(
 			"/home/spnf2f/dataset/casp11/old_mufold_gen/");
 	std::string cnfResultLocation("/home/cf797/test/casp11Alignment/");
+	std::string TMScoreToolLocation("/home/cf797/Tools/");
+	std::string targetTruePDBLocation("/home/spnf2f/dataset/casp11/native/");
 	if (strcmp(argv[1], "-blast") == 0) {
 		BlastParser blastParser(argv[2]);
 		blastParser.loadAlignmentsInfo(alignmentResultLocation, targetLocation,
@@ -34,11 +36,13 @@ int main(int argc, char* argv[]) {
 		blastParser.loadSecondaryStructureAndSolventAccessibility(
 				secondaryStructureAndSolventAccessibilityLocation);
 		blastParser.storeCoordsAndPDB(experimentLocation);
-		blastParser.storeJsonRecords(experimentLocation);
+
 
 		blastParser.storeTrimmedString(experimentLocation);
-		blastParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
-
+		//blastParser.batchGenerateDSSP(experimentLocation, templatePDBLocation);
+		blastParser.batchGenerateTMScore(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation);
+		blastParser.storeJsonRecords(experimentLocation);
 	} else if (strcmp(argv[1], "-hhsearch") == 0) {
 
 		HHSearchParser hhsearchParser(argv[2]);
@@ -47,22 +51,26 @@ int main(int argc, char* argv[]) {
 		hhsearchParser.loadSecondaryStructureAndSolventAccessibility(
 				secondaryStructureAndSolventAccessibilityLocation);
 		hhsearchParser.storeCoordsAndPDB(experimentLocation);
-		hhsearchParser.storeJsonRecords(experimentLocation);
+
 
 		hhsearchParser.storeTrimmedString(experimentLocation);
-		hhsearchParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
+		hhsearchParser.batchGenerateDSSP(experimentLocation,
+				templatePDBLocation);
+		hhsearchParser.storeJsonRecords(experimentLocation);
 
-	}else if(strcmp(argv[1], "-cnf") == 0){
+	} else if (strcmp(argv[1], "-cnf") == 0) {
 		CNFSearchParser cnfsearchParser(argv[2]);
-		cnfsearchParser.loadAlignmentsInfo(cnfResultLocation,
-				targetLocation, proteinDatabaseLocation);
+		cnfsearchParser.loadAlignmentsInfo(cnfResultLocation, targetLocation,
+				proteinDatabaseLocation);
 		cnfsearchParser.loadSecondaryStructureAndSolventAccessibility(
-						secondaryStructureAndSolventAccessibilityLocation);
+				secondaryStructureAndSolventAccessibilityLocation);
 		cnfsearchParser.storeCoordsAndPDB(experimentLocation);
-		cnfsearchParser.storeJsonRecords(experimentLocation);
 
 		cnfsearchParser.storeTrimmedString(experimentLocation);
-		cnfsearchParser.batchGenerateDSSP(experimentLocation,templatePDBLocation);
+		cnfsearchParser.batchGenerateDSSP(experimentLocation,
+				templatePDBLocation);
+		cnfsearchParser.storeJsonRecords(experimentLocation);
+
 	}
 
 	/*
