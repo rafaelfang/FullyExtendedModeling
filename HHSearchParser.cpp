@@ -19,8 +19,8 @@ HHSearchParser::HHSearchParser(string _rootName) {
 void HHSearchParser::batchGenerateTMScore(std::string experimentLocation,
 		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
 	for (int i = 0; i < hhsearchRecords.size(); i++) {
-		//hhsearchRecords[i].generateTMScoreFiles(experimentLocation,
-		//		TMScoreToolLocation, targetTruePDBLocation, i);
+		hhsearchRecords[i].generateTMScoreFiles(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation, i);
 		hhsearchRecords[i].fetchTMScore(experimentLocation, i);
 	}
 }
