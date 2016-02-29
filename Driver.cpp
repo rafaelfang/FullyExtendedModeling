@@ -54,8 +54,10 @@ int main(int argc, char* argv[]) {
 
 
 		hhsearchParser.storeTrimmedString(experimentLocation);
-		hhsearchParser.batchGenerateDSSP(experimentLocation,
-				templatePDBLocation);
+		//hhsearchParser.batchGenerateDSSP(experimentLocation,
+		//		templatePDBLocation);
+		hhsearchParser.batchGenerateTMScore(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation);
 		hhsearchParser.storeJsonRecords(experimentLocation);
 
 	} else if (strcmp(argv[1], "-cnf") == 0) {
@@ -69,6 +71,8 @@ int main(int argc, char* argv[]) {
 		cnfsearchParser.storeTrimmedString(experimentLocation);
 		cnfsearchParser.batchGenerateDSSP(experimentLocation,
 				templatePDBLocation);
+		cnfsearchParser.batchGenerateTMScore(experimentLocation,
+						TMScoreToolLocation, targetTruePDBLocation);
 		cnfsearchParser.storeJsonRecords(experimentLocation);
 
 	}
