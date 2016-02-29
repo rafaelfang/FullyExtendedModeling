@@ -19,8 +19,8 @@ BlastParser::BlastParser(string _rootName) {
 void BlastParser::batchGenerateTMScore(std::string experimentLocation,
 		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
 	for (int i = 0; i < blastRecords.size(); i++) {
-		//blastRecords[i].generateTMScoreFiles(experimentLocation,
-		//		TMScoreToolLocation, targetTruePDBLocation, i);
+		blastRecords[i].generateTMScoreFiles(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation, i);
 		blastRecords[i].fetchTMScore(experimentLocation, i);
 	}
 }
