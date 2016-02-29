@@ -15,6 +15,8 @@ public:
 	Alignment();
 	virtual ~Alignment();
 
+	void fetchTMScore(std::string, int);
+	void generateTMScoreFiles(std::string, std::string, std::string, int id);
 	void generateDSSPFiles(std::string, std::string, int id);
 	void generateBetaSheetFile(std::string, int id);
 	void fetchTrimHit();
@@ -65,7 +67,10 @@ public:
 	void setPredictedSsConf(std::string& predictedSsConf);
 	std::string& getPredictedSsInfo();
 	void setPredictedSsInfo(std::string& predictedSsInfo);
-
+	double getTmScore();
+	void setTmScore(double tmScore);
+	double getGdttsScore();
+	void setGdttsScore(double gdttsScore);
 
 protected:
 	int queryStart;
@@ -92,10 +97,12 @@ protected:
 
 	std::string trimHit;
 
-
 	std::string predicted_ss_info;
 	std::string predicted_sa_info;
 	std::string predicted_ss_conf;
+
+	double tmScore;
+	double gdttsScore;
 
 };
 

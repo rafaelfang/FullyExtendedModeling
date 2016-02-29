@@ -300,6 +300,94 @@ void Alignment::storeInCoordsFormat(std::string experimentLocation, int flag,
 	}
 	myfile.close();
 }
+void Alignment::generateTMScoreFiles(std::string experimentLocation,
+		std::string TMScoreToolLocation, std::string targetTruePDBLocation,
+		int id) {
+
+	std::string model(experimentLocation);
+	model += targetName;
+	model += "/";
+	model += methodUsed;
+	model += "_";
+	model += targetName;
+	model += "_";
+	char buffer[10];
+	sprintf(buffer, "%d", id);
+	model += buffer;
+	model += "_";
+	model += templateName;
+	model += ".pdb";
+
+	std::string native(targetTruePDBLocation);
+	native += targetName;
+	native += ".pdb";
+
+	std::string outputFile(experimentLocation);
+	outputFile += targetName;
+	outputFile += "/";
+	outputFile += methodUsed;
+	outputFile += "_";
+	outputFile += targetName;
+	outputFile += "_";
+	char buffer1[10];
+	sprintf(buffer1, "%d", id);
+	outputFile += buffer1;
+	outputFile += "_";
+	outputFile += templateName;
+	outputFile += ".score";
+
+	std::string command(TMScoreToolLocation);
+	command += "TMscore ";
+	command += model;
+	command += " ";
+	command += native;
+	command += " > ";
+	command += outputFile;
+
+	//cout<<command<<endl;
+	system((char*) command.c_str());
+
+}
+void Alignment::fetchTMScore(std::string experimentLocation, int id) {
+	std::string inputFileName(experimentLocation);
+	inputFileName += targetName;
+	inputFileName += "/";
+	inputFileName += methodUsed;
+	inputFileName += "_";
+	inputFileName += targetName;
+	inputFileName += "_";
+	char buffer[10];
+	sprintf(buffer, "%d", id);
+	inputFileName += buffer;
+	inputFileName += "_";
+	inputFileName += templateName;
+	inputFileName += ".score";
+	FILE * inputFilePtr = fopen((char*) inputFileName.c_str(), "r");
+	if (inputFilePtr == NULL) {
+		cout << inputFileName << " not exist due to the pdb file not exist"
+				<< endl;
+	} else {
+		int lineLength = 5000;
+		char line[lineLength];
+		while (fgets(line, lineLength, inputFilePtr) != NULL) {
+			if ((strstr(line, "TM-score    =") != NULL)) {
+				double _tmScore;
+				sscanf(line + 14, "%lf", &_tmScore);
+				setTmScore(_tmScore);
+				cout << templateName << ",tmscore" << getTmScore() << endl;
+				fgets(line, lineLength, inputFilePtr);
+				fgets(line, lineLength, inputFilePtr);
+				double _gdtts;
+				//cout << line << endl;
+				sscanf(line, "%*s %lf %*s %*s %*s %*s", &_gdtts);
+
+				setGdttsScore(_gdtts);
+				cout << "GDTTSSCORE" << "," << getGdttsScore() << endl;
+				break;
+			}
+		}
+	}
+}
 void Alignment::generateDSSPFiles(std::string experimentLocation,
 		std::string templatePDBLocation, int id) {
 	std::string outputFile(experimentLocation);
@@ -392,7 +480,6 @@ void Alignment::generateBetaSheetFile(std::string experimentLocation, int id) {
 
 				//cout << residue << "," << BP1 << "," << BP2 << "," << BP2Letter
 				//		<< endl;
-
 
 			}
 
@@ -669,4 +756,18 @@ void Alignment::setPredictedSsInfo(std::string& predictedSsInfo) {
 	predicted_ss_info = predictedSsInfo;
 }
 
+double Alignment::getTmScore() {
+	return tmScore;
+}
 
+void Alignment::setTmScore(double tmScore) {
+	this->tmScore = tmScore;
+}
+
+double Alignment::getGdttsScore() {
+	return gdttsScore;
+}
+
+void Alignment::setGdttsScore(double gdttsScore) {
+	this->gdttsScore = gdttsScore;
+}
