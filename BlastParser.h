@@ -30,7 +30,7 @@ public:
 	void storeCoordsAndPDB(string);
 	void storeTrimmedString(std::string);
 	void batchGenerateDSSP(std::string,std::string);
-
+	void batchGenerateTMScore(std::string,std::string,std::string);
 
 private:
 

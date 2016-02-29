@@ -15,10 +15,21 @@ BlastParser::BlastParser(string _rootName) {
 	// TODO Auto-generated ructor stub
 	setRootName(_rootName);
 }
-void BlastParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
-	for(int i=0;i<blastRecords.size();i++){
-		blastRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
-		blastRecords[i].generateBetaSheetFile(experimentLocation,i);
+
+void BlastParser::batchGenerateTMScore(std::string experimentLocation,
+		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
+	for (int i = 0; i < blastRecords.size(); i++) {
+		blastRecords[i].generateTMScoreFiles(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation, i);
+		blastRecords[i].fetchTMScore(experimentLocation, i);
+	}
+}
+void BlastParser::batchGenerateDSSP(std::string experimentLocation,
+		std::string templatePDBLocation) {
+	for (int i = 0; i < blastRecords.size(); i++) {
+		blastRecords[i].generateDSSPFiles(experimentLocation,
+				templatePDBLocation, i);
+		blastRecords[i].generateBetaSheetFile(experimentLocation, i);
 	}
 }
 void BlastParser::loadSecondaryStructureAndSolventAccessibility(
@@ -310,6 +321,10 @@ void BlastParser::storeJsonRecords(string resultPosition) {
 				<< blastRecords[i].getPredictedSaInfo() << "\"," << endl;
 		myfile << "\t\"templateSequenceLength\":\""
 				<< blastRecords[i].getTemplateSequenceLength() << "\"," << endl;
+		myfile << "\t\"TMscore\":\"" << blastRecords[i].getTmScore() << "\","
+				<< endl;
+		myfile << "\t\"GDTTS\":\"" << blastRecords[i].getGdttsScore() << "\","
+				<< endl;
 		myfile << "\t\"score\":\"" << blastRecords[i].getScore() << "\","
 				<< endl;
 		myfile << "\t\"expect\":\"" << blastRecords[i].getExpect() << "\","
