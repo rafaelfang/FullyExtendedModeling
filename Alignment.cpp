@@ -374,7 +374,7 @@ void Alignment::fetchTMScore(std::string experimentLocation, int id) {
 				double _tmScore;
 				sscanf(line + 14, "%lf", &_tmScore);
 				setTmScore(_tmScore);
-				cout << templateName << ",tmscore" << getTmScore() << endl;
+				//cout << templateName << ",tmscore" << getTmScore() << endl;
 				fgets(line, lineLength, inputFilePtr);
 				fgets(line, lineLength, inputFilePtr);
 				double _gdtts;
@@ -382,7 +382,7 @@ void Alignment::fetchTMScore(std::string experimentLocation, int id) {
 				sscanf(line, "%*s %lf %*s %*s %*s %*s", &_gdtts);
 
 				setGdttsScore(_gdtts);
-				cout << "GDTTSSCORE" << "," << getGdttsScore() << endl;
+				//cout << "GDTTSSCORE" << "," << getGdttsScore() << endl;
 				break;
 			}
 		}
