@@ -19,8 +19,8 @@ CNFSearchParser::CNFSearchParser(string _rootName) {
 void CNFSearchParser::batchGenerateTMScore(std::string experimentLocation,
 		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
 	for (int i = 0; i < cnfsearchRecords.size(); i++) {
-		//cnfsearchRecords[i].generateTMScoreFiles(experimentLocation,
-		//		TMScoreToolLocation, targetTruePDBLocation, i);
+		cnfsearchRecords[i].generateTMScoreFiles(experimentLocation,
+				TMScoreToolLocation, targetTruePDBLocation, i);
 		cnfsearchRecords[i].fetchTMScore(experimentLocation, i);
 	}
 }
