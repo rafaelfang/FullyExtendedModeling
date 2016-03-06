@@ -19,15 +19,16 @@ HHSearchParser::HHSearchParser(string _rootName) {
 void HHSearchParser::batchGenerateTMScore(std::string experimentLocation,
 		std::string TMScoreToolLocation, std::string targetTruePDBLocation) {
 	for (int i = 0; i < hhsearchRecords.size(); i++) {
-		hhsearchRecords[i].generateTMScoreFiles(experimentLocation,
-				TMScoreToolLocation, targetTruePDBLocation, i);
+		//hhsearchRecords[i].generateTMScoreFiles(experimentLocation,
+		//		TMScoreToolLocation, targetTruePDBLocation, i);
 		hhsearchRecords[i].fetchTMScore(experimentLocation, i);
 	}
 }
 void HHSearchParser::batchGenerateDSSP(std::string experimentLocation,std::string templatePDBLocation){
 	for(int i=0;i<hhsearchRecords.size();i++){
-		hhsearchRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
+		//hhsearchRecords[i].generateDSSPFiles(experimentLocation,templatePDBLocation, i);
 		hhsearchRecords[i].generateBetaSheetFile(experimentLocation,i);
+		hhsearchRecords[i].generateACCFileFromDSSP(experimentLocation,i);
 	}
 }
 void HHSearchParser::loadSecondaryStructureAndSolventAccessibility(
