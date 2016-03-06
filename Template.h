@@ -24,6 +24,7 @@ public:
 	int getTemplateSequenceLength();
 	void setTemplateSequenceLength(int templateSequenceLength);
 
+
 	int loadTemplateInfo(std::string templateLocation);
 	std::string& getTemplateReferenceSequenceInfo();
 	void setTemplateReferenceSequenceInfo(
@@ -43,6 +44,7 @@ protected:
 	int templateSequenceLength;
 	std::string methodUsed;
 	Point* templateCarbonAlphaCoords;
+
 
 };
 

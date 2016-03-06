@@ -123,10 +123,12 @@ int Template::loadTemplateInfo(std::string templateLocation) {
 				numberOfChars--;
 
 				std::string _referenceTrueSecondaryStructure(line);
-				_referenceTrueSecondaryStructure = _referenceTrueSecondaryStructure.erase(
-						_referenceTrueSecondaryStructure.find_last_not_of(" \n\r\t")
-								+ 1);
-				setTemplateTrueSecondaryStructure(_referenceTrueSecondaryStructure);
+				_referenceTrueSecondaryStructure =
+						_referenceTrueSecondaryStructure.erase(
+								_referenceTrueSecondaryStructure.find_last_not_of(
+										" \n\r\t") + 1);
+				setTemplateTrueSecondaryStructure(
+						_referenceTrueSecondaryStructure);
 
 			}
 			if ((strstr(line, ">Ca XYZ:") != NULL)) {
@@ -196,3 +198,5 @@ void Template::setTemplateTrueSecondaryStructure(
 		std::string& templateTrueSecondaryStructure) {
 	this->templateTrueSecondaryStructure = templateTrueSecondaryStructure;
 }
+
+
