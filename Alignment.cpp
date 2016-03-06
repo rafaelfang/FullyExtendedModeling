@@ -420,7 +420,65 @@ void Alignment::generateDSSPFiles(std::string experimentLocation,
 				<< endl;
 	}
 }
+void Alignment::generateACCFileFromDSSP(std::string experimentLocation,
+		int id) {
+	std::string inputFileName(experimentLocation);
+	inputFileName += targetName;
+	inputFileName += "/";
+	inputFileName += methodUsed;
+	inputFileName += "_";
+	inputFileName += targetName;
+	inputFileName += "_";
+	char buffer[10];
+	sprintf(buffer, "%d", id);
+	inputFileName += buffer;
+	inputFileName += "_";
+	inputFileName += templateName;
+	inputFileName += ".dssp";
+	FILE * inputFilePtr = fopen((char*) inputFileName.c_str(), "r");
+	if (inputFilePtr == NULL) {
+		cout << inputFileName << " not exist due to the pdb file not exist"
+				<< endl;
+	} else {
+		int lineLength = 5000;
+		char line[lineLength];
+		std::string outputFile(experimentLocation);
+		outputFile += targetName;
+		outputFile += "/";
+		outputFile += methodUsed;
+		outputFile += "_";
+		outputFile += targetName;
+		outputFile += "_";
+		char buffer[10];
+		sprintf(buffer, "%d", id);
+		outputFile += buffer;
+		outputFile += "_";
+		outputFile += templateName;
+		outputFile += ".accFromDSSP";
+		FILE *pFile = fopen((char*) outputFile.c_str(), "w");
+		fprintf(pFile, "residue,ACC\n");
+		while (fgets(line, lineLength, inputFilePtr) != NULL) {
+			if ((strstr(line, "  #  RESIDUE AA") != NULL)) {
+				break;
+			}
+		}
+		//iterate until   #  RESIDUE AA
+		while (fgets(line, lineLength, inputFilePtr) != NULL) {
+			int residue;
+			int acc;
+			sscanf(line + 6, "%d", &residue);
+			sscanf(line + 36, "%d", &acc);
 
+			fprintf(pFile, "%d,%d\n", residue, acc);
+
+			//cout << residue << "," << BP1 << "," << BP2 << "," << BP2Letter
+			//		<< endl;
+
+		}
+		fclose(pFile);
+
+	}
+}
 void Alignment::generateBetaSheetFile(std::string experimentLocation, int id) {
 	std::string inputFileName(experimentLocation);
 	inputFileName += targetName;

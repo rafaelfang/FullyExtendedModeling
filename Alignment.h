@@ -14,7 +14,8 @@ class Alignment: public Template {
 public:
 	Alignment();
 	virtual ~Alignment();
-
+	void generateACCFileFromDSSP(std::string, int);
+	void fetchAccFromDSSP(std::string,int);
 	void fetchTMScore(std::string, int);
 	void generateTMScoreFiles(std::string, std::string, std::string, int id);
 	void generateDSSPFiles(std::string, std::string, int id);
